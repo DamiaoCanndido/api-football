@@ -1,0 +1,20 @@
+{
+  "name": "football-api",
+  "version": "0.0.1",
+  "description": "Api de futebol",
+  "main": "index.js",
+  "scripts": {
+    "test": "",
+    "dev": "tsx watch src/main.ts"
+  },
+  "keywords": [],
+  "author": "Damião Cândido",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
