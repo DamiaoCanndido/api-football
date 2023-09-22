@@ -1,6 +1,7 @@
 import express, { Application } from 'express';
 import * as dotenv from 'dotenv';
 import { connectDB } from 'infra/database';
+import { errorMiddleware } from 'middlewares/error-middleware';
 
 dotenv.config();
 
@@ -17,7 +18,9 @@ export class App {
 
   routesInitialize() {}
 
-  errorInterception() {}
+  errorInterception() {
+    this.app.use(errorMiddleware);
+  }
 
   middlewaresInitialize() {
     this.app.use(express.json());
