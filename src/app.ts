@@ -1,11 +1,12 @@
 import express, { Application } from 'express';
 import * as dotenv from 'dotenv';
-import { connectDB } from 'infra/database';
 import { errorMiddleware } from 'middlewares/error-middleware';
+import { CountryRoutes } from 'routes/country-routes';
 
 dotenv.config();
 
 export class App {
+  private countryRoutes = new CountryRoutes();
   public app: Application;
 
   constructor() {
@@ -13,10 +14,11 @@ export class App {
     this.middlewaresInitialize();
     this.routesInitialize();
     this.errorInterception();
-    connectDB();
   }
 
-  routesInitialize() {}
+  routesInitialize() {
+    this.app.use('/country', this.countryRoutes.router);
+  }
 
   errorInterception() {
     this.app.use(errorMiddleware);
