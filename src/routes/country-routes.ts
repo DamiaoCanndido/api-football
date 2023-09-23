@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { CountryRepositoryDB } from '../repositories/country-repository-db';
-import { CountryUseCase } from 'use-cases/country-use-case';
+import { CountryUseCase } from '../use-cases/country-use-case';
 import { CountryController } from '../controllers/country-controller';
 
 export class CountryRoutes {
