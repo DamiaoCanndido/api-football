@@ -1,7 +1,7 @@
 import express, { Application } from 'express';
 import * as dotenv from 'dotenv';
-import { errorMiddleware } from './middlewares/error-middleware';
-import { CountryRoutes } from './routes/country-routes';
+import { errorMiddleware } from '../middlewares';
+import { CountryRoutes } from '../routes';
 
 dotenv.config();
 

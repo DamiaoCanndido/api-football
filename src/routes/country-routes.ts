@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { CountryRepositoryDB } from '../repositories/country-repository-db';
-import { CountryUseCase } from '../use-cases/country-use-case';
-import { CountryController } from '../controllers/country-controller';
+import { CountryRepositoryDB } from '../repositories';
+import { CountryUseCase } from '../use-cases';
+import { CountryController } from '../controllers';
 
 export class CountryRoutes {
   public router: Router;

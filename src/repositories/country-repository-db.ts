@@ -1,5 +1,5 @@
-import { prisma } from '../infra/database';
-import { Country } from '../entities/country';
+import { prisma } from '../infra';
+import { Country } from '../entities';
 
 export class CountryRepositoryDB {
   async add({ name, code, flag }: Country): Promise<Country> {

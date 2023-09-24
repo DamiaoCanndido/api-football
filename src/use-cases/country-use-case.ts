@@ -1,5 +1,5 @@
-import { Country } from 'entities/country';
-import { CountryRepository } from '../interfaces/country-repository';
+import { Country } from '../entities';
+import { CountryRepository } from '../interfaces';
 
 export class CountryUseCase implements CountryRepository {
   constructor(private countryRepository: CountryRepository) {}

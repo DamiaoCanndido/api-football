@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { CountryUseCase } from '../use-cases/country-use-case';
-import { Country } from '../entities/country';
+import { CountryUseCase } from '../use-cases';
+import { Country } from '../entities';
 
 export class CountryController {
   constructor(private countryUseCase: CountryUseCase) {}

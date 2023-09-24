@@ -1,5 +1,5 @@
-import { Country } from '../src/entities/country';
-import { App } from '../src/app';
+import { Country } from '../src/entities';
+import { App } from '../src/main/app';
 import request from 'supertest';
 
 const app = new App().app;

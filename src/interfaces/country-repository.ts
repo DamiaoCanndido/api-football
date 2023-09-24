@@ -1,4 +1,4 @@
-import { Country } from '../entities/country';
+import { Country } from '../entities';
 
 export interface CountryRepository {
   add: (country: Country) => Promise<Country>;
