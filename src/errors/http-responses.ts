@@ -3,7 +3,7 @@ import { HttpException } from './http-exception';
 export function httpResponses(error: HttpException) {
   if (error.message.search('prisma') > 0) {
     return {
-      message: 'Validation error.',
+      message: 'Some field is missing.',
       status: 400,
     };
   }
