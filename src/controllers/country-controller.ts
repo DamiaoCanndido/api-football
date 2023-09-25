@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { CountryUseCase } from '../use-cases';
-import { Country } from '../entities';
+import { Country, CountryQueries } from '../entities';
 import { HttpException } from '../errors';
 
 export class CountryController {
@@ -14,6 +14,16 @@ export class CountryController {
       }
       const country = await this.countryUseCase.add({ name, code, flag });
       return res.status(201).json(country);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async search(req: Request, res: Response, next: NextFunction) {
+    const { name, code }: CountryQueries = req.query;
+    try {
+      const countries = await this.countryUseCase.search({ name, code });
+      return res.status(201).json(countries);
     } catch (error) {
       next(error);
     }

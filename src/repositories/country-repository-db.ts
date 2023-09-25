@@ -1,5 +1,5 @@
 import { prisma } from '../infra';
-import { Country } from '../entities';
+import { Country, CountryQueries } from '../entities';
 
 export class CountryRepositoryDB {
   async add({ name, code, flag }: Country): Promise<Country> {
@@ -11,5 +11,21 @@ export class CountryRepositoryDB {
       },
     });
     return country;
+  }
+
+  async search({ code, name }: CountryQueries): Promise<Country[]> {
+    const countries = await prisma.country.findMany({
+      where: {
+        name: {
+          contains: name,
+          mode: 'insensitive',
+        },
+        code: {
+          contains: code,
+          mode: 'insensitive',
+        },
+      },
+    });
+    return countries;
   }
 }

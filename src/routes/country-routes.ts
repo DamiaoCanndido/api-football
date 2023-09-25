@@ -20,5 +20,9 @@ export class CountryRoutes {
       '/',
       this.countryController.add.bind(this.countryController)
     );
+    this.router.get(
+      '/',
+      this.countryController.search.bind(this.countryController)
+    );
   }
 }
