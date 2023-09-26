@@ -23,7 +23,7 @@ export class CountryController {
     const { name, code }: CountryQueries = req.query;
     try {
       const countries = await this.countryUseCase.search({ name, code });
-      return res.status(201).json(countries);
+      return res.status(200).json(countries);
     } catch (error) {
       next(error);
     }
