@@ -11,6 +11,7 @@
   "author": "Damião Cândido",
   "license": "ISC",
   "devDependencies": {
+    "@jest-mock/express": "^2.0.2",
     "@types/express": "^4.17.17",
     "@types/jest": "^29.5.5",
     "@types/supertest": "^2.0.12",

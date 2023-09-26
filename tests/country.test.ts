@@ -42,5 +42,9 @@ describe('Unit test', () => {
     countryRepository.search.mockResolvedValue([country]);
     const result = await countryUseCase.search(country);
     expect(result).toEqual([country]);
+    expect(countryRepository.search).toHaveBeenCalledWith({
+      name: 'Chile',
+      code: 'CHI',
+    });
   });
 });
