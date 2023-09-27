@@ -11,8 +11,18 @@ datasource db {
 }
 
 model Country {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-  code String
-  flag String
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  name  String
+  code  String
+  flag  String
+  teams Team[]
+}
+
+model Team {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  code      String
+  logo      String
+  country   Country @relation(fields: [countryId], references: [id])
+  countryId String  @db.ObjectId
 }

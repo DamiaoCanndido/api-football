@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { HttpException, httpResponses } from '../errors';
+import { HttpException } from '../errors';
 
 export function errorMiddleware(
   err: HttpException,
@@ -7,8 +7,8 @@ export function errorMiddleware(
   res: Response,
   next: NextFunction
 ) {
-  const status: number = httpResponses(err).status;
-  const message: string = httpResponses(err).message;
+  const status: number = err.status ?? 500;
+  const message: string = err.message ?? 'Internal server error.';
 
   res.status(status).json({
     status,

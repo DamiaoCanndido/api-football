@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { CountryUseCase } from '../use-cases';
 import { Country, CountryQueries } from '../entities';
-import { HttpException } from '../errors';
+import { Validator } from '../errors/validator';
 
 export class CountryController {
   constructor(private countryUseCase: CountryUseCase) {}
@@ -9,9 +9,7 @@ export class CountryController {
   async add(req: Request, res: Response, next: NextFunction) {
     const { name, code, flag }: Country = req.body;
     try {
-      if (name === '' || code === '' || flag === '') {
-        throw new HttpException(400, 'Some fields are blank.');
-      }
+      new Validator<Country>({ name, code, flag }).blank().missing();
       const country = await this.countryUseCase.add({ name, code, flag });
       return res.status(201).json(country);
     } catch (error) {
