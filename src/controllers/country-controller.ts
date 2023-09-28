@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { CountryUseCase } from '../use-cases';
 import { Country, CountryQueries } from '../entities';
-import { Validator } from '../errors/validator';
+import { Validator } from '../errors';
 
 export class CountryController {
   constructor(private countryUseCase: CountryUseCase) {}

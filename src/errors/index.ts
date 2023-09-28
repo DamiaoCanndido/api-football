@@ -1,2 +1,2 @@
 export * from './http-exception';
-export * from './http-responses';
+export * from './validator';
