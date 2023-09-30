@@ -1,8 +1,8 @@
 import { Country, CountryQueries } from '../entities';
-import { CountryRepository } from '../interfaces';
+import { CountryInterface } from '../interfaces';
 
-export class CountryUseCase implements CountryRepository {
-  constructor(private countryRepository: CountryRepository) {}
+export class CountryUseCase implements CountryInterface {
+  constructor(private countryRepository: CountryInterface) {}
 
   async add(country: Country) {
     const result = await this.countryRepository.add(country);

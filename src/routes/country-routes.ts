@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { CountryRepositoryDB } from '../repositories';
+import { CountryRepository } from '../repositories';
 import { CountryUseCase } from '../use-cases';
 import { CountryController } from '../controllers';
 
@@ -9,7 +9,7 @@ export class CountryRoutes {
 
   constructor() {
     this.router = Router();
-    const countryRepositoryDB = new CountryRepositoryDB();
+    const countryRepositoryDB = new CountryRepository();
     const countryUseCase = new CountryUseCase(countryRepositoryDB);
     this.countryController = new CountryController(countryUseCase);
     this.initRoutes();

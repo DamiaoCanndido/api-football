@@ -1,8 +1,8 @@
 import { Team, TeamQueries } from '../entities';
-import { TeamRepository } from '../interfaces';
+import { TeamInterface } from '../interfaces';
 
-export class TeamUseCase implements TeamRepository {
-  constructor(private teamRepository: TeamRepository) {}
+export class TeamUseCase implements TeamInterface {
+  constructor(private teamRepository: TeamInterface) {}
 
   async add(team: Team) {
     const result = await this.teamRepository.add(team);

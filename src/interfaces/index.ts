@@ -1,2 +1,2 @@
-export * from './country-repository';
-export * from './team-repository';
+export * from './country-interface';
+export * from './team-interface';

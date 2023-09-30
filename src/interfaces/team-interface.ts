@@ -1,6 +1,6 @@
 import { Team, TeamQueries } from '../entities';
 
-export interface TeamRepository {
+export interface TeamInterface {
   add: (team: Team) => Promise<Team>;
   search: (team: TeamQueries) => Promise<Team[]>;
 }

@@ -1,9 +1,9 @@
 import { prisma } from '../infra';
 import { Team, TeamQueries } from '../entities';
-import { TeamRepository } from '../interfaces';
+import { TeamInterface } from '../interfaces';
 import { HttpException } from '../errors';
 
-export class TeamRepositoryDB implements TeamRepository {
+export class TeamRepository implements TeamInterface {
   async add({ name, code, logo, countryId }: Team): Promise<Team> {
     try {
       await prisma.country.findUnique({

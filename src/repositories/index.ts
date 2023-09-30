@@ -1,2 +1,2 @@
-export * from './country-repository-db';
-export * from './team-repository-db';
+export * from './country-repository';
+export * from './team-repository';

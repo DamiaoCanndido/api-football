@@ -1,8 +1,8 @@
 import { prisma } from '../infra';
 import { Country, CountryQueries } from '../entities';
-import { CountryRepository } from '../interfaces';
+import { CountryInterface } from '../interfaces';
 
-export class CountryRepositoryDB implements CountryRepository {
+export class CountryRepository implements CountryInterface {
   async add({ name, code, flag }: Country): Promise<Country> {
     const country = await prisma.country.create({
       data: {
