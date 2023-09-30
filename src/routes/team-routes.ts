@@ -17,5 +17,6 @@ export class TeamRoutes {
 
   initRoutes() {
     this.router.post('/', this.teamController.add.bind(this.teamController));
+    this.router.get('/', this.teamController.search.bind(this.teamController));
   }
 }

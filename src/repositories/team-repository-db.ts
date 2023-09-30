@@ -1,5 +1,5 @@
 import { prisma } from '../infra';
-import { Team } from '../entities';
+import { Team, TeamQueries } from '../entities';
 import { TeamRepository } from '../interfaces';
 import { HttpException } from '../errors';
 
@@ -24,5 +24,28 @@ export class TeamRepositoryDB implements TeamRepository {
       },
     });
     return team;
+  }
+
+  async search({ code, name, country, league }: TeamQueries): Promise<Team[]> {
+    const teams = await prisma.team.findMany({
+      where: {
+        name: {
+          contains: name,
+          mode: 'insensitive',
+        },
+        code: {
+          contains: code,
+          mode: 'insensitive',
+        },
+        country: {
+          name: {
+            contains: country,
+            mode: 'insensitive',
+          },
+        },
+        // league ID
+      },
+    });
+    return teams;
   }
 }
