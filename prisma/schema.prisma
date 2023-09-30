@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,18 +8,55 @@ datasource db {
 }
 
 model Country {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  name  String
-  code  String
-  flag  String
-  teams Team[]
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  name    String
+  code    String
+  flag    String
+  teams   Team[]
+  leagues League[]
 }
 
 model Team {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
   name      String
   code      String
   logo      String
-  country   Country @relation(fields: [countryId], references: [id])
-  countryId String  @db.ObjectId
+  countryId String     @db.ObjectId
+  country   Country    @relation(fields: [countryId], references: [id])
+  home      Fixtures[] @relation("home")
+  away      Fixtures[] @relation("away")
+}
+
+enum LeagueType {
+  LEAGUE
+  CUP
+}
+
+model League {
+  // dependendo do tipo preencha os rounds.
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  type      LeagueType
+  logo      String
+  season    String
+  rounds    String[]
+  countryId String?    @db.ObjectId
+  country   Country?   @relation(fields: [countryId], references: [id])
+  Fixtures  Fixtures[]
+}
+
+model Fixtures {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  fullTime    Boolean @default(false)
+  round       String?
+  leagueId    String? @db.ObjectId
+  league      League? @relation(fields: [leagueId], references: [id])
+  homeId      String  @unique @db.ObjectId
+  home        Team    @relation("home", fields: [homeId], references: [id])
+  awayId      String  @unique @db.ObjectId
+  away        Team    @relation("away", fields: [awayId], references: [id])
+  homeScore   Int?
+  awayScore   Int?
+  homePenalty Int?
+  awayPenalty Int?
 }
