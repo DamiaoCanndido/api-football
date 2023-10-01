@@ -9,8 +9,12 @@ export class TeamRoutes {
 
   constructor() {
     this.router = Router();
-    const teamRepositoryDB = new TeamRepository();
-    const teamUseCase = new TeamUseCase(teamRepositoryDB);
+    const teamRepository = new TeamRepository();
+    const teamUseCase = new TeamUseCase(
+      teamRepository,
+      teamRepository,
+      teamRepository
+    );
     this.teamController = new TeamController(teamUseCase);
     this.initRoutes();
   }

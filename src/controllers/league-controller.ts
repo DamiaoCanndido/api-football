@@ -7,30 +7,19 @@ export class LeagueController {
   constructor(private leagueUseCase: LeagueUseCase) {}
 
   async add(req: Request, res: Response, next: NextFunction) {
-    const {
-      name,
-      type,
-      logo,
-      season,
-      numberOfRounds,
-      rounds,
-      numberOfGroups,
-      numberOfRoundsByGroup,
-      playoffStages,
-      countryId,
-    }: League = req.body;
+    const lg: League = req.body;
 
     const league = new League(
-      name,
-      type,
-      logo,
-      season,
-      numberOfRounds,
-      rounds,
-      numberOfGroups,
-      numberOfRoundsByGroup,
-      playoffStages,
-      countryId
+      lg.name,
+      lg.type,
+      lg.logo,
+      lg.season,
+      lg.numberOfRounds,
+      lg.rounds,
+      lg.numberOfGroups,
+      lg.numberOfRoundsByGroup,
+      lg.playoffStages,
+      lg.countryId
     );
 
     try {

@@ -1,11 +1,11 @@
 import { League } from '../entities';
-import { LeagueInterface } from '../interfaces';
+import { LeagueAddInterface } from '../interfaces/league';
 
-export class LeagueUseCase implements LeagueInterface {
-  constructor(private leagueRepository: LeagueInterface) {}
+export class LeagueUseCase implements LeagueAddInterface {
+  constructor(private addRepo: LeagueAddInterface) {}
 
   async add(league: League) {
-    const result = await this.leagueRepository.add(league);
+    const result = await this.addRepo.add(league);
     return result;
   }
 }

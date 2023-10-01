@@ -1,8 +1,8 @@
 import { prisma } from '../infra';
 import { League } from '../entities';
-import { LeagueInterface } from '../interfaces';
+import { LeagueAddInterface } from '../interfaces/league';
 
-export class LeagueRepository implements LeagueInterface {
+export class LeagueRepository implements LeagueAddInterface {
   async add(lgParam: League): Promise<League> {
     const league = await prisma.league.create({
       data: {

@@ -1,9 +1,15 @@
 import { prisma } from '../infra';
 import { Team, TeamQueries } from '../entities';
-import { TeamInterface } from '../interfaces';
+import {
+  TeamAddInterface,
+  TeamSearchInterface,
+  TeamFindoneInterface,
+} from '../interfaces/team';
 import { HttpException } from '../errors';
 
-export class TeamRepository implements TeamInterface {
+export class TeamRepository
+  implements TeamAddInterface, TeamSearchInterface, TeamFindoneInterface
+{
   async add({ name, code, logo }: Team): Promise<Team> {
     const team = await prisma.team.create({
       data: {
