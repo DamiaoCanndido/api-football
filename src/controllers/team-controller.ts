@@ -31,4 +31,14 @@ export class TeamController {
       next(error);
     }
   }
+
+  async findOne(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const team = await this.teamUseCase.findOne(id);
+      return res.status(200).json(team);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

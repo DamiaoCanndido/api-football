@@ -13,4 +13,9 @@ export class TeamUseCase implements TeamInterface {
     const results = await this.teamRepository.search(team);
     return results;
   }
+
+  async findOne(id: string) {
+    const results = await this.teamRepository.findOne(id);
+    return results;
+  }
 }
