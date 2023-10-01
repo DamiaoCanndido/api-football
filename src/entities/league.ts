@@ -1,18 +1,4 @@
-type Params = {
-  name: string;
-  type: leagueType;
-  logo: string;
-  season: string;
-  numberOfRounds: number;
-  rounds: string[];
-  numberOfGroups: number;
-  numberOfRoundsByGroup: number;
-  playoffStages: number;
-  countryId?: string;
-  _id?: string;
-};
-
-type leagueType = 'league' | 'cup';
+type leagueType = 'LEAGUE' | 'CUP';
 const playoffStagesType = [
   'Finals',
   'Semifinals',
@@ -21,19 +7,31 @@ const playoffStagesType = [
 ];
 
 export class League {
-  constructor(params: Params) {
-    if (params.type === 'league') {
-      params.rounds = Array.from(
-        { length: params.numberOfRounds },
+  constructor(
+    public name: string,
+    public type: leagueType,
+    public logo: string,
+    public season: string,
+    public numberOfRounds: number,
+    public rounds: string[],
+    public numberOfGroups: number,
+    public numberOfRoundsByGroup: number,
+    public playoffStages: number,
+    public countryId?: string,
+    public _id?: string
+  ) {
+    if (type === 'LEAGUE') {
+      rounds = Array.from(
+        { length: numberOfRounds },
         (_, index) => 'Round ' + (index + 1).toString()
       );
     } else {
-      params.rounds = Array.from(
-        { length: params.numberOfRoundsByGroup },
+      rounds = Array.from(
+        { length: numberOfRoundsByGroup },
         (_, index) => 'Group Stage - Round ' + (index + 1).toString()
       );
-      const phases = playoffStagesType.slice(0, params.playoffStages).reverse();
-      params.rounds = params.rounds.concat(phases);
+      const phases = playoffStagesType.slice(0, playoffStages).reverse();
+      rounds = rounds.concat(phases);
     }
   }
 }

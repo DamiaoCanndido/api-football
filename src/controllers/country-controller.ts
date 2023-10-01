@@ -8,9 +8,10 @@ export class CountryController {
 
   async add(req: Request, res: Response, next: NextFunction) {
     const { name, code, flag }: Country = req.body;
+    const param = { name, code, flag };
     try {
-      new Validator<Country>({ name, code, flag }).blank().missing();
-      const country = await this.countryUseCase.add({ name, code, flag });
+      new Validator<Country>(param).blank().missing();
+      const country = await this.countryUseCase.add(param);
       return res.status(201).json(country);
     } catch (error) {
       next(error);

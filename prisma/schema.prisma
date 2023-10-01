@@ -39,7 +39,7 @@ model League {
   type      LeagueType
   logo      String
   season    String
-  rounds    String[]
+  rounds    String[]   @default([])
   countryId String?    @db.ObjectId
   country   Country?   @relation(fields: [countryId], references: [id])
   Fixtures  Fixtures[]

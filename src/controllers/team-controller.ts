@@ -8,9 +8,10 @@ export class TeamController {
 
   async add(req: Request, res: Response, next: NextFunction) {
     const { name, code, logo, countryId }: Team = req.body;
+    const param = { name, code, logo, countryId };
     try {
-      new Validator<Team>({ name, code, logo, countryId }).blank().missing();
-      const team = await this.teamUseCase.add({ name, code, logo, countryId });
+      new Validator<Team>(param).blank().missing();
+      const team = await this.teamUseCase.add(param);
       return res.status(201).json(team);
     } catch (error) {
       next(error);
