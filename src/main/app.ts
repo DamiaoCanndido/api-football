@@ -1,12 +1,11 @@
 import express, { Application } from 'express';
 import * as dotenv from 'dotenv';
 import { errorMiddleware } from '../middlewares';
-import { CountryRoutes, TeamRoutes, LeagueRoutes } from '../routes';
+import { TeamRoutes, LeagueRoutes } from '../routes';
 
 dotenv.config();
 
 export class App {
-  private countryRoutes = new CountryRoutes();
   private teamRoutes = new TeamRoutes();
   private leagueRoutes = new LeagueRoutes();
 
@@ -20,7 +19,6 @@ export class App {
   }
 
   routesInitialize() {
-    this.app.use('/country', this.countryRoutes.router);
     this.app.use('/team', this.teamRoutes.router);
     this.app.use('/league', this.leagueRoutes.router);
   }

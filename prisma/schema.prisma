@@ -7,24 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Country {
-  id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  name    String
-  code    String
-  flag    String
-  teams   Team[]
-  leagues League[]
-}
-
 model Team {
-  id        String     @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  code      String
-  logo      String
-  countryId String     @db.ObjectId
-  country   Country    @relation(fields: [countryId], references: [id])
-  home      Fixtures[] @relation("home")
-  away      Fixtures[] @relation("away")
+  id     String     @id @default(auto()) @map("_id") @db.ObjectId
+  name   String
+  code   String
+  logo   String
+  home   Fixtures[] @relation("home")
+  away   Fixtures[] @relation("away")
+  League League[]
 }
 
 enum LeagueType {
@@ -33,7 +23,6 @@ enum LeagueType {
 }
 
 model League {
-  // dependendo do tipo preencha os rounds.
   id             String     @id @default(auto()) @map("_id") @db.ObjectId
   name           String
   type           LeagueType
@@ -42,7 +31,7 @@ model League {
   rounds         String[]   @default([])
   numberOfRounds Int
   countryId      String?    @db.ObjectId
-  country        Country?   @relation(fields: [countryId], references: [id])
+  country        Team?      @relation(fields: [countryId], references: [id])
   Fixtures       Fixtures[]
 }
 

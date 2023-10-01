@@ -3,7 +3,6 @@ export class Team {
     public name: string,
     public code: string,
     public logo: string,
-    public countryId: string,
     public _id?: string
   ) {}
 }

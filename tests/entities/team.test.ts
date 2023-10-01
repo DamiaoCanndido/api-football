@@ -5,16 +5,10 @@ describe('Team entity', () => {
     name: 'any_team',
     code: 'ANY',
     logo: 'uruguai.png',
-    countryId: 'any_country_id',
   };
 
   it('should create with team data only', () => {
-    const result = new Team(
-      teamData.name,
-      teamData.code,
-      teamData.logo,
-      teamData.countryId
-    );
+    const result = new Team(teamData.name, teamData.code, teamData.logo);
     expect(result).toEqual(teamData);
   });
 });
