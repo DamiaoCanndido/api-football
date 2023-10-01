@@ -34,15 +34,16 @@ enum LeagueType {
 
 model League {
   // dependendo do tipo preencha os rounds.
-  id        String     @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  type      LeagueType
-  logo      String
-  season    String
-  rounds    String[]   @default([])
-  countryId String?    @db.ObjectId
-  country   Country?   @relation(fields: [countryId], references: [id])
-  Fixtures  Fixtures[]
+  id             String     @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  type           LeagueType
+  logo           String
+  season         String
+  rounds         String[]   @default([])
+  numberOfRounds Int
+  countryId      String?    @db.ObjectId
+  country        Country?   @relation(fields: [countryId], references: [id])
+  Fixtures       Fixtures[]
 }
 
 model Fixtures {

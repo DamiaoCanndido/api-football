@@ -13,25 +13,27 @@ export class League {
     public logo: string,
     public season: string,
     public numberOfRounds: number,
-    public rounds: string[],
-    public numberOfGroups: number,
-    public numberOfRoundsByGroup: number,
-    public playoffStages: number,
-    public countryId?: string,
-    public _id?: string
+    public rounds: string[] | null = [],
+    public numberOfGroups?: number | null,
+    public numberOfRoundsByGroup?: number | null,
+    public playoffStages?: number | null,
+    public countryId?: string | null
   ) {
     if (type === 'LEAGUE') {
-      rounds = Array.from(
-        { length: numberOfRounds },
+      this.numberOfGroups = 0;
+      this.numberOfRoundsByGroup = 0;
+      this.playoffStages = 0;
+      this.rounds = Array.from(
+        { length: this.numberOfRounds },
         (_, index) => 'Round ' + (index + 1).toString()
       );
     } else {
-      rounds = Array.from(
-        { length: numberOfRoundsByGroup },
+      this.rounds = Array.from(
+        { length: this.numberOfRoundsByGroup! },
         (_, index) => 'Group Stage - Round ' + (index + 1).toString()
       );
-      const phases = playoffStagesType.slice(0, playoffStages).reverse();
-      rounds = rounds.concat(phases);
+      const phases = playoffStagesType.slice(0, this.playoffStages!).reverse();
+      this.rounds = this.rounds.concat(phases);
     }
   }
 }
