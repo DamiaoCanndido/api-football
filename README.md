@@ -12,7 +12,3 @@ Essa api foi criada como fonte de estudo e também para ser usada como portfóli
 
 ## TASKS
 
-1. Fazer testes para league
-2. Separar repositories
-
-

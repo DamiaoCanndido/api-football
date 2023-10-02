@@ -10,9 +10,9 @@ export class LeagueAddRepository implements LeagueAddInterface {
         logo: lgParam.logo,
         season: lgParam.season,
         type: lgParam.type,
-        countryId: lgParam.countryId,
         numberOfRounds: lgParam.numberOfRounds,
-        rounds: lgParam.rounds!,
+        rounds: lgParam.rounds,
+        countryId: lgParam.countryId,
       },
     });
     return league;

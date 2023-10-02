@@ -13,9 +13,6 @@ describe('League test', () => {
       season: '2023',
       numberOfRounds: 3,
       rounds: [],
-      numberOfGroups: 3,
-      numberOfRoundsByGroup: 3,
-      playoffStages: 3,
       countryId: '6514036e66f44d3920615a93',
     };
     const response = await request(app).post('/league').send(league);

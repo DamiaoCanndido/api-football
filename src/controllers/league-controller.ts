@@ -16,9 +16,6 @@ export class LeagueController {
       lg.season,
       lg.numberOfRounds,
       lg.rounds,
-      lg.numberOfGroups,
-      lg.numberOfRoundsByGroup,
-      lg.playoffStages,
       lg.countryId
     );
 
