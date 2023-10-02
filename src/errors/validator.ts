@@ -5,7 +5,7 @@ export class Validator<T extends {}> {
 
   blank(): this {
     for (const key in this.data) {
-      if (this.data[key] === '' || this.data[key] === null) {
+      if (this.data[key] === '') {
         throw new HttpException(400, `The field ${key} is empty.`);
       }
     }

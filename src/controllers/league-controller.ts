@@ -21,7 +21,9 @@ export class LeagueController {
 
     try {
       new Validator<League>(league).blank().missing();
-      const country = await this.leagueUseCase.add({ ...league });
+      const country = await this.leagueUseCase.add({
+        ...league,
+      });
       return res.status(201).json(country);
     } catch (error) {
       next(error);

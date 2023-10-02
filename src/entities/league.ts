@@ -10,6 +10,9 @@ export class League {
     public rounds: string[],
     public countryId?: string | null
   ) {
+    if (this.countryId === undefined) {
+      this.countryId = null;
+    }
     this.rounds = Array.from(
       { length: this.numberOfRounds },
       (_, index) => 'Round ' + (index + 1).toString()
