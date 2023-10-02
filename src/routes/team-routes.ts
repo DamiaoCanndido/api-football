@@ -1,5 +1,9 @@
 import { Router } from 'express';
-import { TeamRepository } from '../repositories';
+import {
+  TeamAddRepository,
+  TeamSearchRepository,
+  TeamFindoneRepository,
+} from '../repositories/team';
 import { TeamUseCase } from '../use-cases';
 import { TeamController } from '../controllers';
 
@@ -9,12 +13,10 @@ export class TeamRoutes {
 
   constructor() {
     this.router = Router();
-    const teamRepository = new TeamRepository();
-    const teamUseCase = new TeamUseCase(
-      teamRepository,
-      teamRepository,
-      teamRepository
-    );
+    const addRepo = new TeamAddRepository();
+    const searchRepo = new TeamSearchRepository();
+    const findoneRepo = new TeamFindoneRepository();
+    const teamUseCase = new TeamUseCase(addRepo, searchRepo, findoneRepo);
     this.teamController = new TeamController(teamUseCase);
     this.initRoutes();
   }

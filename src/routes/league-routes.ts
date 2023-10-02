@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { LeagueRepository } from '../repositories';
+import { LeagueAddRepository } from '../repositories/league';
 import { LeagueUseCase } from '../use-cases';
 import { LeagueController } from '../controllers';
 
@@ -9,8 +9,8 @@ export class LeagueRoutes {
 
   constructor() {
     this.router = Router();
-    const leagueRepository = new LeagueRepository();
-    const leagueUseCase = new LeagueUseCase(leagueRepository);
+    const leagueAddRepository = new LeagueAddRepository();
+    const leagueUseCase = new LeagueUseCase(leagueAddRepository);
     this.leagueController = new LeagueController(leagueUseCase);
     this.initRoutes();
   }
