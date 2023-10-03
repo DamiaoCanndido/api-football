@@ -12,3 +12,5 @@ Essa api foi criada como fonte de estudo e também para ser usada como portfóli
 
 ## TASKS
 
+1. Buscar ligas pelo nome e país e id, e ordenar pela season
+

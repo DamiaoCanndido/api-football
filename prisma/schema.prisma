@@ -36,15 +36,16 @@ model League {
 }
 
 model Fixtures {
-  id          String  @id @default(auto()) @map("_id") @db.ObjectId
-  fullTime    Boolean @default(false)
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  fullTime    Boolean  @default(false)
+  startDate   DateTime
   round       String?
-  leagueId    String? @db.ObjectId
-  league      League? @relation(fields: [leagueId], references: [id])
-  homeId      String  @unique @db.ObjectId
-  home        Team    @relation("home", fields: [homeId], references: [id])
-  awayId      String  @unique @db.ObjectId
-  away        Team    @relation("away", fields: [awayId], references: [id])
+  leagueId    String?  @db.ObjectId
+  league      League?  @relation(fields: [leagueId], references: [id])
+  homeId      String   @unique @db.ObjectId
+  home        Team     @relation("home", fields: [homeId], references: [id])
+  awayId      String   @unique @db.ObjectId
+  away        Team     @relation("away", fields: [awayId], references: [id])
   homeScore   Int?
   awayScore   Int?
   homePenalty Int?
