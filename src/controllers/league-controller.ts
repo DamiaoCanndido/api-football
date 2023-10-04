@@ -41,4 +41,14 @@ export class LeagueController {
       next(error);
     }
   }
+
+  async findOne(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const league = await this.leagueUseCase.findOne(id);
+      return res.status(200).json(league);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

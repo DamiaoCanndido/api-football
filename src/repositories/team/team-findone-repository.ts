@@ -14,7 +14,7 @@ export class TeamFindoneRepository implements TeamFindoneInterface {
       if (!team) {
         throw new HttpException(400, 'Id invalid.');
       }
-      return team!;
+      return team;
     } catch {
       throw new HttpException(400, 'Id invalid.');
     }
