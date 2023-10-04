@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { LeagueUseCase } from '../use-cases';
-import { League } from '../entities';
+import { League, LeagueQueries } from '../entities';
 import { Validator } from '../errors';
 
 export class LeagueController {
@@ -25,6 +25,18 @@ export class LeagueController {
         ...league,
       });
       return res.status(201).json(country);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async search(req: Request, res: Response, next: NextFunction) {
+    const { name }: LeagueQueries = req.query;
+    try {
+      const leagues = await this.leagueUseCase.search({
+        name,
+      });
+      return res.status(200).json(leagues);
     } catch (error) {
       next(error);
     }

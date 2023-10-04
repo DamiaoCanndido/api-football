@@ -1,4 +1,4 @@
-type leagueType = 'LEAGUE' | 'CUP';
+export type leagueType = 'LEAGUE' | 'CUP';
 
 export class League {
   constructor(

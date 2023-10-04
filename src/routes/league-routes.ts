@@ -1,5 +1,8 @@
 import { Router } from 'express';
-import { LeagueAddRepository } from '../repositories/league';
+import {
+  LeagueAddRepository,
+  LeagueSearchRepository,
+} from '../repositories/league';
 import { LeagueUseCase } from '../use-cases';
 import { LeagueController } from '../controllers';
 
@@ -10,7 +13,11 @@ export class LeagueRoutes {
   constructor() {
     this.router = Router();
     const leagueAddRepository = new LeagueAddRepository();
-    const leagueUseCase = new LeagueUseCase(leagueAddRepository);
+    const leagueSearchRepository = new LeagueSearchRepository();
+    const leagueUseCase = new LeagueUseCase(
+      leagueAddRepository,
+      leagueSearchRepository
+    );
     this.leagueController = new LeagueController(leagueUseCase);
     this.initRoutes();
   }
@@ -19,6 +26,10 @@ export class LeagueRoutes {
     this.router.post(
       '/',
       this.leagueController.add.bind(this.leagueController)
+    );
+    this.router.get(
+      '/',
+      this.leagueController.search.bind(this.leagueController)
     );
   }
 }
