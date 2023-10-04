@@ -51,4 +51,14 @@ export class LeagueController {
       next(error);
     }
   }
+
+  async findbyCountry(req: Request, res: Response, next: NextFunction) {
+    const { countryId }: LeagueQueries = req.params;
+    try {
+      const leagues = await this.leagueUseCase.findByCountry(countryId);
+      return res.status(200).json(leagues);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

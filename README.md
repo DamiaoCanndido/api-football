@@ -12,5 +12,3 @@ Essa api foi criada como fonte de estudo e também para ser usada como portfóli
 
 ## TASKS
 
-1. Buscar ligas pelo id e countryId
-
