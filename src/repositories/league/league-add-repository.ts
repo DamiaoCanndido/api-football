@@ -6,14 +6,15 @@ import { HttpException } from '../../errors';
 export class LeagueAddRepository implements LeagueAddInterface {
   async add(lgParam: League): Promise<League> {
     try {
-      const countryExists = await prisma.team.findUnique({
-        where: {
-          id: lgParam.countryId!,
-        },
-      });
-
-      if (!countryExists) {
-        throw new HttpException(404, 'country id not found.');
+      if (lgParam.countryId) {
+        const countryExists = await prisma.team.findUnique({
+          where: {
+            id: lgParam.countryId!,
+          },
+        });
+        if (!countryExists) {
+          throw new HttpException(404, 'country id not found.');
+        }
       }
 
       const league = await prisma.league.create({
@@ -28,7 +29,7 @@ export class LeagueAddRepository implements LeagueAddInterface {
         },
       });
       return league;
-    } catch (error) {
+    } catch {
       throw new HttpException(404, 'country id not valid.');
     }
   }
