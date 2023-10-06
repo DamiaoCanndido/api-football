@@ -29,8 +29,11 @@ export class LeagueAddRepository implements LeagueAddInterface {
         },
       });
       return league;
-    } catch {
-      throw new HttpException(404, 'country id not valid.');
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw new HttpException(error.status, error.message);
+      }
+      throw new HttpException(500, 'Database error.');
     }
   }
 }

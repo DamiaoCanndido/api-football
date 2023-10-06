@@ -1,13 +1,14 @@
 import express, { Application } from 'express';
 import * as dotenv from 'dotenv';
 import { errorMiddleware } from '../middlewares';
-import { TeamRoutes, LeagueRoutes } from '../routes';
+import { TeamRoutes, LeagueRoutes, FixturesRoutes } from '../routes';
 
 dotenv.config();
 
 export class App {
   private teamRoutes = new TeamRoutes();
   private leagueRoutes = new LeagueRoutes();
+  private fixturesRoutes = new FixturesRoutes();
 
   public app: Application;
 
@@ -21,6 +22,7 @@ export class App {
   routesInitialize() {
     this.app.use('/team', this.teamRoutes.router);
     this.app.use('/league', this.leagueRoutes.router);
+    this.app.use('/fixtures', this.fixturesRoutes.router);
   }
 
   errorInterception() {
