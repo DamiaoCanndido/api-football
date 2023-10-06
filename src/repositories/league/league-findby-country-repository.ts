@@ -21,8 +21,11 @@ export class LeagueFindbyCountryRepository
         throw new HttpException(400, 'Country id invalid.');
       }
       return leagues;
-    } catch {
-      throw new HttpException(400, 'Country id invalid.');
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw new HttpException(error.status, error.message);
+      }
+      throw new HttpException(400, 'Database error.');
     }
   }
 }

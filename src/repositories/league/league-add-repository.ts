@@ -33,7 +33,7 @@ export class LeagueAddRepository implements LeagueAddInterface {
       if (error instanceof HttpException) {
         throw new HttpException(error.status, error.message);
       }
-      throw new HttpException(500, 'Database error.');
+      throw new HttpException(400, 'Database error.');
     }
   }
 }

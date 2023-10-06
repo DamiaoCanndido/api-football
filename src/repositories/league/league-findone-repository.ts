@@ -15,8 +15,11 @@ export class LeagueFindoneRepository implements LeagueFindoneInterface {
         throw new HttpException(400, 'Id invalid.');
       }
       return league;
-    } catch {
-      throw new HttpException(400, 'Id invalid.');
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw new HttpException(error.status, error.message);
+      }
+      throw new HttpException(400, 'Database error.');
     }
   }
 }

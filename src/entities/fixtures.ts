@@ -1,3 +1,5 @@
+import { Team } from './team';
+
 export class FixturesInput {
   constructor(
     public startDate: string,
@@ -15,9 +17,10 @@ export class FixturesInput {
 
 export class FixturesOutput {
   constructor(
+    public id: string,
     public startDate: Date,
-    public homeId: string,
-    public awayId: string,
+    public home: Team,
+    public away: Team,
     public leagueId?: string | null,
     public round?: string | null
   ) {}

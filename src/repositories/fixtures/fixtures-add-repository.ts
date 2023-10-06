@@ -39,12 +39,19 @@ export class FixturesAddRepository implements FixturesAddInterface {
           round: leagueExists! ? leagueExists!.rounds[fxParam.round!] : null,
         },
       });
-      return fixtures;
+      return {
+        id: fixtures.id,
+        home: teamsExists[0],
+        away: teamsExists[1],
+        startDate: fixtures.startDate,
+        round: fixtures.round,
+        leagueId: fixtures.leagueId,
+      };
     } catch (error) {
       if (error instanceof HttpException) {
         throw new HttpException(error.status, error.message);
       }
-      throw new HttpException(500, 'Database error.');
+      throw new HttpException(400, 'Database error.');
     }
   }
 }
