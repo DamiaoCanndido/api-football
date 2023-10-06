@@ -13,7 +13,7 @@ export class LeagueAddRepository implements LeagueAddInterface {
           },
         });
         if (!countryExists) {
-          throw new HttpException(404, 'country id not found.');
+          throw new HttpException(404, 'country id not valid.');
         }
       }
 

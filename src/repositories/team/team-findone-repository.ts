@@ -12,11 +12,11 @@ export class TeamFindoneRepository implements TeamFindoneInterface {
         },
       });
       if (!team) {
-        throw new HttpException(400, 'Id invalid.');
+        throw new HttpException(404, 'Id invalid.');
       }
       return team;
     } catch {
-      throw new HttpException(400, 'Id invalid.');
+      throw new HttpException(404, 'Id invalid.');
     }
   }
 }
