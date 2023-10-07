@@ -1,7 +1,3 @@
 export class TeamQueries {
-  constructor(
-    public name?: string,
-    public league?: string,
-    public code?: string
-  ) {}
+  constructor(public name?: string, public code?: string) {}
 }

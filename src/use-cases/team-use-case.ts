@@ -3,15 +3,21 @@ import {
   TeamAddInterface,
   TeamSearchInterface,
   TeamFindoneInterface,
+  TeamFindByLeagueInterface,
 } from '../interfaces/team';
 
 export class TeamUseCase
-  implements TeamAddInterface, TeamSearchInterface, TeamFindoneInterface
+  implements
+    TeamAddInterface,
+    TeamSearchInterface,
+    TeamFindoneInterface,
+    TeamFindByLeagueInterface
 {
   constructor(
     private addRepo: TeamAddInterface,
     private searchRepo: TeamSearchInterface,
-    private findoneRepo: TeamFindoneInterface
+    private findoneRepo: TeamFindoneInterface,
+    private findbyLeagueRepo: TeamFindByLeagueInterface
   ) {}
 
   async add(team: Team) {
@@ -27,5 +33,10 @@ export class TeamUseCase
   async findOne(id: string) {
     const results = await this.findoneRepo.findOne(id);
     return results;
+  }
+
+  async findByLeague(leagueId: string) {
+    const result = await this.findbyLeagueRepo.findByLeague(leagueId);
+    return result;
   }
 }

@@ -14,8 +14,6 @@ export class TeamSearchRepository implements TeamSearchInterface {
           contains: code,
           mode: 'insensitive',
         },
-
-        // league ID
       },
     });
     return teams;

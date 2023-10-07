@@ -19,12 +19,11 @@ export class TeamController {
   }
 
   async search(req: Request, res: Response, next: NextFunction) {
-    const { name, code, league }: TeamQueries = req.query;
+    const { name, code }: TeamQueries = req.query;
     try {
       const teams = await this.teamUseCase.search({
         name,
         code,
-        league,
       });
       return res.status(200).json(teams);
     } catch (error) {
@@ -37,6 +36,16 @@ export class TeamController {
       const { id } = req.params;
       const team = await this.teamUseCase.findOne(id);
       return res.status(200).json(team);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async findByLeague(req: Request, res: Response, next: NextFunction) {
+    const { leagueId } = req.params;
+    try {
+      const teams = await this.teamUseCase.findByLeague(leagueId);
+      return res.status(200).json(teams);
     } catch (error) {
       next(error);
     }

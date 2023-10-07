@@ -3,6 +3,7 @@ import {
   TeamAddRepository,
   TeamSearchRepository,
   TeamFindoneRepository,
+  TeamFindByLeagueRepository,
 } from '../repositories/team';
 import { TeamUseCase } from '../use-cases';
 import { TeamController } from '../controllers';
@@ -16,7 +17,13 @@ export class TeamRoutes {
     const addRepo = new TeamAddRepository();
     const searchRepo = new TeamSearchRepository();
     const findoneRepo = new TeamFindoneRepository();
-    const teamUseCase = new TeamUseCase(addRepo, searchRepo, findoneRepo);
+    const findByLeagueRepo = new TeamFindByLeagueRepository();
+    const teamUseCase = new TeamUseCase(
+      addRepo,
+      searchRepo,
+      findoneRepo,
+      findByLeagueRepo
+    );
     this.teamController = new TeamController(teamUseCase);
     this.initRoutes();
   }
@@ -27,6 +34,10 @@ export class TeamRoutes {
     this.router.get(
       '/:id',
       this.teamController.findOne.bind(this.teamController)
+    );
+    this.router.get(
+      '/:leagueId/league',
+      this.teamController.findByLeague.bind(this.teamController)
     );
   }
 }
