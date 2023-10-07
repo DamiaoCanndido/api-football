@@ -36,7 +36,9 @@ export class FixturesAddRepository implements FixturesAddInterface {
           homeId: fxParam.homeId,
           awayId: fxParam.awayId,
           leagueId: fxParam.leagueId,
-          round: leagueExists! ? leagueExists!.rounds[fxParam.round!] : null,
+          round: leagueExists!
+            ? leagueExists!.rounds[fxParam.round! - 1]
+            : null,
         },
       });
       return {
