@@ -40,15 +40,12 @@ export class FixturesAddRepository implements FixturesAddInterface {
             ? leagueExists!.rounds[fxParam.round! - 1]
             : null,
         },
+        include: {
+          home: true,
+          away: true,
+        },
       });
-      return {
-        id: fixtures.id,
-        home: teamsExists[0],
-        away: teamsExists[1],
-        startDate: fixtures.startDate,
-        round: fixtures.round,
-        leagueId: fixtures.leagueId,
-      };
+      return fixtures;
     } catch (error) {
       if (error instanceof HttpException) {
         throw new HttpException(error.status, error.message);

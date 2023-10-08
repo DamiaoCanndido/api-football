@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { FixturesUseCase } from '../use-cases';
-import { FixturesInput, FixturesQueries } from '../entities';
+import { FixturesInput, FixturesQueries, FixturesScores } from '../entities';
 import { Validator } from '../errors';
 
 export class FixturesController {
@@ -46,6 +46,26 @@ export class FixturesController {
         teamId,
         round,
       });
+      return res.status(200).json(fixtures);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async updateScores(req: Request, res: Response, next: NextFunction) {
+    const { id }: FixturesScores = req.params;
+    const { homeScore, awayScore, homePenalty, awayPenalty }: FixturesScores =
+      req.body;
+    const fxParams = new FixturesScores(
+      id,
+      homeScore,
+      awayScore,
+      homePenalty,
+      awayPenalty
+    );
+    try {
+      new Validator(fxParams).blank().missing();
+      const fixtures = await this.fixturesUseCase.updateScores(fxParams);
       return res.status(200).json(fixtures);
     } catch (error) {
       next(error);
