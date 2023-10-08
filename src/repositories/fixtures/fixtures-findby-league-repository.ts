@@ -15,7 +15,6 @@ export class FixturesFindByLeagueRepository
       const fixtures = await prisma.fixtures.findMany({
         where: {
           leagueId,
-          OR: [{ homeId: teamId }, { awayId: teamId }],
           round: {
             endsWith: round,
           },
@@ -26,7 +25,7 @@ export class FixturesFindByLeagueRepository
         },
       });
       if (fixtures.length === 0) {
-        throw new HttpException(404, 'league id not valid.');
+        throw new HttpException(404, 'league id or round not valid.');
       }
       return fixtures;
     } catch (error) {

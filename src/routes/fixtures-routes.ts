@@ -25,7 +25,7 @@ export class FixturesRoutes {
       this.fixturesController.add.bind(this.fixturesController)
     );
     this.router.get(
-      '/',
+      '/:leagueId/league',
       this.fixturesController.findByLeague.bind(this.fixturesController)
     );
   }

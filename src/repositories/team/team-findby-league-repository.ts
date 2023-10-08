@@ -8,11 +8,10 @@ export class TeamFindByLeagueRepository implements TeamFindByLeagueInterface {
     try {
       const teams = await prisma.team.findMany({
         where: {
-          League: {
-            some: {
-              id: leagueId,
-            },
-          },
+          OR: [
+            { home: { some: { leagueId } } },
+            { away: { some: { leagueId } } },
+          ],
         },
       });
       if (teams.length < 1) {
