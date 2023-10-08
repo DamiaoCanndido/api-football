@@ -27,12 +27,24 @@ export class FixturesController {
   async findByLeague(req: Request, res: Response, next: NextFunction) {
     const { leagueId }: FixturesQueries = req.params;
     const { round }: FixturesQueries = req.query;
-    const { teamId }: FixturesQueries = req.body;
     try {
       const fixtures = await this.fixturesUseCase.findByLeague({
         leagueId,
         round,
+      });
+      return res.status(200).json(fixtures);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async findByTeam(req: Request, res: Response, next: NextFunction) {
+    const { teamId }: FixturesQueries = req.params;
+    const { round }: FixturesQueries = req.query;
+    try {
+      const fixtures = await this.fixturesUseCase.findByTeam({
         teamId,
+        round,
       });
       return res.status(200).json(fixtures);
     } catch (error) {

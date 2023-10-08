@@ -1,19 +1,19 @@
 import { prisma } from '../../infra';
-import { FixturesFindByLeagueInterface } from '../../interfaces/fixtures';
+import { FixturesFindByTeamInterface } from '../../interfaces/fixtures';
 import { FixturesQueries, FixturesOutput } from '../../entities';
 import { HttpException } from '../../errors';
 
-export class FixturesFindByLeagueRepository
-  implements FixturesFindByLeagueInterface
+export class FixturesFindByTeamRepository
+  implements FixturesFindByTeamInterface
 {
-  async findByLeague({
-    leagueId,
+  async findByTeam({
+    teamId,
     round,
   }: FixturesQueries): Promise<FixturesOutput[]> {
     try {
       const fixtures = await prisma.fixtures.findMany({
         where: {
-          leagueId,
+          OR: [{ homeId: teamId }, { awayId: teamId }],
           round: {
             endsWith: round,
           },
@@ -24,7 +24,7 @@ export class FixturesFindByLeagueRepository
         },
       });
       if (fixtures.length === 0) {
-        throw new HttpException(404, 'league id or round not valid.');
+        throw new HttpException(404, 'team id or round not valid.');
       }
       return fixtures;
     } catch (error) {

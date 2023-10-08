@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
   FixturesAddRepository,
   FixturesFindByLeagueRepository,
+  FixturesFindByTeamRepository,
 } from '../repositories/fixtures';
 import { FixturesUseCase } from '../use-cases';
 import { FixturesController } from '../controllers';
@@ -14,7 +15,12 @@ export class FixturesRoutes {
     this.router = Router();
     const addRepo = new FixturesAddRepository();
     const findByLeagueRepo = new FixturesFindByLeagueRepository();
-    const fixturesUseCase = new FixturesUseCase(addRepo, findByLeagueRepo);
+    const findByTeamRepo = new FixturesFindByTeamRepository();
+    const fixturesUseCase = new FixturesUseCase(
+      addRepo,
+      findByLeagueRepo,
+      findByTeamRepo
+    );
     this.fixturesController = new FixturesController(fixturesUseCase);
     this.initRoutes();
   }
@@ -27,6 +33,10 @@ export class FixturesRoutes {
     this.router.get(
       '/:leagueId/league',
       this.fixturesController.findByLeague.bind(this.fixturesController)
+    );
+    this.router.get(
+      '/:teamId/team',
+      this.fixturesController.findByTeam.bind(this.fixturesController)
     );
   }
 }
