@@ -15,7 +15,7 @@ export class FixturesFindByTeamRepository
         where: {
           OR: [{ homeId: teamId }, { awayId: teamId }],
           round: {
-            endsWith: round,
+            contains: round,
           },
         },
         include: {

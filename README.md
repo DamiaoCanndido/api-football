@@ -4,11 +4,20 @@ Essa api foi criada como fonte de estudo e também para ser usada como portfóli
 
 ## ROUTES
 
-|  | TEAM | LEAGUE |
-| --- | --- | --- |
-| add (POST) | /team | /league |
-| search (GET) | /team?name=x&?code=x | ? |
-| findone (GET) | /team/:id | ? |
+| NAME | METHOD | ROUTES | QUERIES |
+| --- | --- | --- | --- 
+| add | POST | /team |
+| search  | GET | /team | name, code
+| findone | GET | /team/:id |
+| findbyleague | GET | /team/:leagueId/league |
+| add | POST | /league |
+| search  | GET | /league | name
+| findone | GET | /league/:id |
+| findbycountry | GET | /league/:countryId/country |
+| add | POST | /fixtures |
+| findbyleague | GET | /fixtures/:leagueId/league | round
+| findbyteam | GET | /fixtures/:teamId/team | round
+| updatescore | PUT | /fixtures/:id |
 
 ## TASKS
 

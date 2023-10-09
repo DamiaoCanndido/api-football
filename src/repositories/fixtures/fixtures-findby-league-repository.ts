@@ -15,7 +15,7 @@ export class FixturesFindByLeagueRepository
         where: {
           leagueId,
           round: {
-            endsWith: round,
+            contains: round,
           },
         },
         include: {
