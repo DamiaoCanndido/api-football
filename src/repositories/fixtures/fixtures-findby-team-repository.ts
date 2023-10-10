@@ -6,17 +6,11 @@ import { HttpException } from '../../errors';
 export class FixturesFindByTeamRepository
   implements FixturesFindByTeamInterface
 {
-  async findByTeam({
-    teamId,
-    round,
-  }: FixturesQueries): Promise<FixturesOutput[]> {
+  async findByTeam({ teamId }: FixturesQueries): Promise<FixturesOutput[]> {
     try {
       const fixtures = await prisma.fixtures.findMany({
         where: {
           OR: [{ homeId: teamId }, { awayId: teamId }],
-          round: {
-            contains: round,
-          },
         },
         include: {
           home: true,

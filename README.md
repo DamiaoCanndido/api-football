@@ -16,7 +16,7 @@ Essa api foi criada como fonte de estudo e também para ser usada como portfóli
 | findbycountry | GET | /league/:countryId/country |
 | add | POST | /fixtures |
 | findbyleague | GET | /fixtures/:leagueId/league | round
-| findbyteam | GET | /fixtures/:teamId/team | round
+| findbyteam | GET | /fixtures/:teamId/team |
 | updatescore | PUT | /fixtures/:id |
 
 ## TASKS
