@@ -16,6 +16,9 @@ export class FixturesFindByTeamRepository
           home: true,
           away: true,
         },
+        orderBy: {
+          fullTime: 'asc',
+        },
       });
       if (fixtures.length === 0) {
         throw new HttpException(404, 'team id or round not valid.');

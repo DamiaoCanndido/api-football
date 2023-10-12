@@ -19,5 +19,3 @@ Essa api foi criada como fonte de estudo e também para ser usada como portfóli
 | findbyteam | GET | /fixtures/:teamId/team |
 | updatescore | PUT | /fixtures/:id |
 
-## TASKS
-

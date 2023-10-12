@@ -18,7 +18,13 @@ export class FixturesUpdateScoresRepository
         where: {
           id,
         },
-        data: { homeScore, awayScore, homePenalty, awayPenalty },
+        data: {
+          homeScore,
+          awayScore,
+          homePenalty,
+          awayPenalty,
+          fullTime: true,
+        },
         include: {
           home: true,
           away: true,
