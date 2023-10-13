@@ -30,6 +30,12 @@ export class FixturesAddRepository implements FixturesAddInterface {
         }
       }
 
+      const dateNow = Date.now() - new Date().getTimezoneOffset() * 60 * 1000;
+
+      if (new Date(fxParam.startDate).getTime() < dateNow) {
+        throw new HttpException(400, 'start date not valid.');
+      }
+
       const fixtures = await prisma.fixtures.create({
         data: {
           startDate: new Date(fxParam.startDate),
