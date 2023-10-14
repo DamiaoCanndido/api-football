@@ -1,3 +1,5 @@
+import { HttpException } from '../errors';
+
 export type leagueType = 'LEAGUE' | 'CUP';
 
 export class League {
@@ -10,6 +12,18 @@ export class League {
     public rounds: string[],
     public countryId?: string | null
   ) {
+    if (!this.name || this.name.length < 5) {
+      throw new HttpException(400, 'Name is incorrect.');
+    }
+    if (!this.logo || this.logo.length < 3) {
+      throw new HttpException(400, 'Logo is incorrect.');
+    }
+    if (!this.season || this.season.length < 9) {
+      throw new HttpException(400, 'Season is incorrect.');
+    }
+    if (!this.numberOfRounds || this.numberOfRounds <= 0) {
+      throw new HttpException(400, 'number of rounds is incorrect.');
+    }
     if (this.countryId === undefined) {
       this.countryId = null;
     }
