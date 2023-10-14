@@ -7,8 +7,7 @@ export class TeamController {
   constructor(private teamUseCase: TeamUseCase) {}
 
   async add(req: Request, res: Response, next: NextFunction) {
-    const { name, code, logo }: Team = req.body;
-    const param = { name, code, logo };
+    const param: Team = req.body;
     try {
       new Validator<Team>(param).blank().missing();
       const team = await this.teamUseCase.add(param);

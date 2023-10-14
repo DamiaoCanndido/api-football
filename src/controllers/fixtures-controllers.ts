@@ -40,9 +40,11 @@ export class FixturesController {
 
   async findByTeam(req: Request, res: Response, next: NextFunction) {
     const { teamId }: FixturesQueries = req.params;
+    const { leagueId }: FixturesQueries = req.body;
     try {
       const fixtures = await this.fixturesUseCase.findByTeam({
         teamId,
+        leagueId,
       });
       return res.status(200).json(fixtures);
     } catch (error) {

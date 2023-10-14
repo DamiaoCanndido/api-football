@@ -6,19 +6,21 @@ import { HttpException } from '../../errors';
 export class FixturesFindByTeamRepository
   implements FixturesFindByTeamInterface
 {
-  async findByTeam({ teamId }: FixturesQueries): Promise<FixturesOutput[]> {
+  async findByTeam({
+    teamId,
+    leagueId,
+  }: FixturesQueries): Promise<FixturesOutput[]> {
     try {
       const fixtures = await prisma.fixtures.findMany({
         where: {
           OR: [{ homeId: teamId }, { awayId: teamId }],
+          leagueId,
         },
         include: {
           home: true,
           away: true,
         },
-        orderBy: {
-          fullTime: 'asc',
-        },
+        orderBy: [{ fullTime: 'asc' }, { startDate: 'asc' }],
       });
       if (fixtures.length === 0) {
         throw new HttpException(404, 'team id or round not valid.');

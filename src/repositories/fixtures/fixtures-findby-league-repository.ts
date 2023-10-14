@@ -22,9 +22,7 @@ export class FixturesFindByLeagueRepository
           home: true,
           away: true,
         },
-        orderBy: {
-          startDate: 'asc',
-        },
+        orderBy: [{ fullTime: 'asc' }, { startDate: 'asc' }],
       });
       if (fixtures.length === 0) {
         throw new HttpException(404, 'league id or round not valid.');
