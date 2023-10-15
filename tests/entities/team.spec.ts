@@ -1,46 +1,40 @@
-import { test, expect, describe } from 'vitest';
+import { test, expect, describe, beforeEach } from 'vitest';
 import { Team } from '../../src/entities';
 
 describe('Team entity', () => {
-  test('should create only with team data', () => {
-    const data = {
+  let data: Team;
+  beforeEach(() => {
+    data = {
       name: 'Brasil',
       code: 'BRA',
       isCountry: true,
       logo: 'brazil.png',
     };
+  });
+
+  test('should create only with team data', () => {
     const sut = new Team(data.name, data.code, data.isCountry, data.logo);
     expect(sut).toEqual(data);
   });
 
   test('should return an empty name exception', () => {
-    const dataEmpty = {
-      name: '',
-      code: 'BRA',
-      isCountry: true,
-      logo: 'brazil.png',
-    };
+    data.name = '';
     function name(team: Team) {
       new Team(team.name, team.code, team.isCountry, team.logo);
     }
-    expect(() => name(dataEmpty)).toThrowError('Name is incorrect.');
+    expect(() => name(data)).toThrowError('Name is incorrect.');
   });
 
   test('should return an empty code exception', () => {
-    const dataEmpty = {
-      name: 'Brasil',
-      code: '',
-      isCountry: true,
-      logo: 'brazil.png',
-    };
+    data.code = '';
     function code(team: Team) {
       new Team(team.name, team.code, team.isCountry, team.logo);
     }
-    expect(() => code(dataEmpty)).toThrowError('Code is incorrect.');
+    expect(() => code(data)).toThrowError('Code is incorrect.');
   });
 
   test('should return an empty country exception', () => {
-    const dataEmpty = {
+    const data = {
       name: 'Brasil',
       code: 'BRA',
       isCountry: null,
@@ -49,19 +43,14 @@ describe('Team entity', () => {
     function country(team: any) {
       new Team(team.name, team.code, team.isCountry, team.logo);
     }
-    expect(() => country(dataEmpty)).toThrowError('isCountry is incorrect.');
+    expect(() => country(data)).toThrowError('isCountry is incorrect.');
   });
 
   test('should return an empty logo exception', () => {
-    const dataEmpty = {
-      name: 'Brasil',
-      code: 'BRA',
-      isCountry: true,
-      logo: '',
-    };
+    data.logo = '';
     function logo(team: Team) {
       new Team(team.name, team.code, team.isCountry, team.logo);
     }
-    expect(() => logo(dataEmpty)).toThrowError('Logo is incorrect.');
+    expect(() => logo(data)).toThrowError('Logo is incorrect.');
   });
 });
