@@ -8,12 +8,7 @@ export class TeamController {
   async add(req: Request, res: Response, next: NextFunction) {
     const param: Team = req.body;
     try {
-      const iTeam = new Team(
-        param.name,
-        param.code,
-        param.isCountry,
-        param.logo
-      );
+      const iTeam = new Team(param.name, param.code, param.type, param.logo);
       const team = await this.teamUseCase.add(iTeam);
       return res.status(201).json(team);
     } catch (error) {
@@ -22,12 +17,12 @@ export class TeamController {
   }
 
   async search(req: Request, res: Response, next: NextFunction) {
-    const { name, code, isCountry }: TeamQueries = req.query;
+    const { name, code, type }: TeamQueries = req.query;
     try {
       const teams = await this.teamUseCase.search({
         name,
         code,
-        isCountry,
+        type,
       });
       return res.status(200).json(teams);
     } catch (error) {

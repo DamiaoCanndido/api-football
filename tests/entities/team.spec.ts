@@ -7,20 +7,20 @@ describe('Team entity', () => {
     data = {
       name: 'Brasil',
       code: 'BRA',
-      isCountry: true,
+      type: 'selection',
       logo: 'brazil.png',
     };
   });
 
   test('should create only with team data', () => {
-    const sut = new Team(data.name, data.code, data.isCountry, data.logo);
+    const sut = new Team(data.name, data.code, data.type, data.logo);
     expect(sut).toEqual(data);
   });
 
   test('should return an empty name exception', () => {
     data.name = '';
     function name(team: Team) {
-      new Team(team.name, team.code, team.isCountry, team.logo);
+      new Team(team.name, team.code, team.type, team.logo);
     }
     expect(() => name(data)).toThrowError('Name is incorrect.');
   });
@@ -28,28 +28,28 @@ describe('Team entity', () => {
   test('should return an empty code exception', () => {
     data.code = '';
     function code(team: Team) {
-      new Team(team.name, team.code, team.isCountry, team.logo);
+      new Team(team.name, team.code, team.type, team.logo);
     }
     expect(() => code(data)).toThrowError('Code is incorrect.');
   });
 
-  test('should return an empty country exception', () => {
+  test('should return an empty type exception', () => {
     const data = {
       name: 'Brasil',
       code: 'BRA',
-      isCountry: null,
+      type: null,
       logo: 'brazil.png',
     };
     function country(team: any) {
-      new Team(team.name, team.code, team.isCountry, team.logo);
+      new Team(team.name, team.code, team.type, team.logo);
     }
-    expect(() => country(data)).toThrowError('isCountry is incorrect.');
+    expect(() => country(data)).toThrowError('type is incorrect.');
   });
 
   test('should return an empty logo exception', () => {
     data.logo = '';
     function logo(team: Team) {
-      new Team(team.name, team.code, team.isCountry, team.logo);
+      new Team(team.name, team.code, team.type, team.logo);
     }
     expect(() => logo(data)).toThrowError('Logo is incorrect.');
   });

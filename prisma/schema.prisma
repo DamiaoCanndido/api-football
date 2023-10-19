@@ -7,20 +7,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum TeamType {
+  club
+  selection
+  amateur
+}
+
 model Team {
-  id        String     @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  code      String
-  isCountry Boolean
-  logo      String
-  home      Fixtures[] @relation("home")
-  away      Fixtures[] @relation("away")
-  League    League[]
+  id     String     @id @default(auto()) @map("_id") @db.ObjectId
+  name   String
+  code   String
+  type   TeamType
+  logo   String
+  home   Fixtures[] @relation("home")
+  away   Fixtures[] @relation("away")
+  League League[]
 }
 
 enum LeagueType {
-  LEAGUE
-  CUP
+  league
+  cup
 }
 
 model League {

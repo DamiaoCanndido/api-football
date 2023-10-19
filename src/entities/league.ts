@@ -1,6 +1,6 @@
 import { HttpException } from '../errors';
 
-export type leagueType = 'LEAGUE' | 'CUP';
+export type leagueType = 'league' | 'cup';
 
 export class League {
   constructor(
@@ -14,6 +14,10 @@ export class League {
   ) {
     if (!this.name || this.name.length < 5) {
       throw new HttpException(400, 'Name is incorrect.');
+    }
+    if (this.type === 'cup' || this.type === 'league') {
+    } else {
+      throw new HttpException(400, 'Type is incorrect.');
     }
     if (!this.logo || this.logo.length < 3) {
       throw new HttpException(400, 'Logo is incorrect.');
