@@ -70,4 +70,13 @@ export class FixturesController {
       next(error);
     }
   }
+
+  async groupByDates(req: Request, res: Response, next: NextFunction) {
+    try {
+      const fixtures = await this.fixturesUseCase.groupByDates();
+      return res.status(200).json(fixtures);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
