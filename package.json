@@ -12,6 +12,7 @@
   "author": "Damião Cândido",
   "license": "ISC",
   "devDependencies": {
+    "@types/cors": "^2.8.15",
     "@types/express": "^4.17.19",
     "@vitest/coverage-v8": "^0.34.6",
     "@vitest/ui": "^0.34.6",
@@ -22,6 +23,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.3.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "mongoose": "^7.5.2"

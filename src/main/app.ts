@@ -1,4 +1,5 @@
 import express, { Application } from 'express';
+import cors from 'cors';
 import * as dotenv from 'dotenv';
 import { errorMiddleware } from '../middlewares';
 import { TeamRoutes, LeagueRoutes, FixturesRoutes } from '../routes';
@@ -30,6 +31,7 @@ export class App {
   }
 
   middlewaresInitialize() {
+    this.app.use(cors());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
   }
