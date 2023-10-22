@@ -8,6 +8,14 @@ export class LeagueFindbyCountryRepository
 {
   async findByCountry(countryId: string): Promise<League[]> {
     try {
+      const country = await prisma.team.findUnique({
+        where: {
+          id: countryId,
+        },
+      });
+      if (!country) {
+        throw new HttpException(400, 'Country id invalid.');
+      }
       const leagues = await prisma.league.findMany({
         where: {
           country: {
@@ -17,9 +25,6 @@ export class LeagueFindbyCountryRepository
           },
         },
       });
-      if (leagues.length === 0) {
-        throw new HttpException(400, 'Country id invalid.');
-      }
       return leagues;
     } catch (error) {
       if (error instanceof HttpException) {

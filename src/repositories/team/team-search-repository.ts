@@ -16,6 +16,9 @@ export class TeamSearchRepository implements TeamSearchInterface {
         },
         type,
       },
+      orderBy: {
+        name: 'asc',
+      },
     });
     return teams;
   }
