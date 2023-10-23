@@ -10,7 +10,15 @@ export class FixturesGroupByDatesRepository
     try {
       const fixtures = await prisma.fixtures.findMany({
         orderBy: [{ fullTime: 'asc' }, { startDate: 'asc' }],
-        include: { home: true, away: true },
+        include: {
+          home: true,
+          away: true,
+          league: {
+            select: {
+              name: true,
+            },
+          },
+        },
       });
       return fixtures;
     } catch (error) {

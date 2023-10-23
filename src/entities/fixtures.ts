@@ -1,6 +1,10 @@
 import { HttpException } from '../errors';
 import { Team } from './team';
 
+type League = {
+  name: string;
+};
+
 export class FixturesInput {
   constructor(
     public startDate: string,
@@ -40,6 +44,7 @@ export class FixturesOutput {
     public home: Team,
     public away: Team,
     public leagueId?: string | null,
-    public round?: string | null
+    public round?: string | null,
+    public league?: League | null
   ) {}
 }

@@ -11,6 +11,24 @@ export class FixturesFindByTeamRepository
     leagueId,
   }: FixturesQueries): Promise<FixturesOutput[]> {
     try {
+      const team = await prisma.team.findUnique({
+        where: {
+          id: teamId,
+        },
+      });
+      if (!team) {
+        throw new HttpException(404, 'team id not valid.');
+      }
+      if (leagueId) {
+        const league = await prisma.league.findUnique({
+          where: {
+            id: leagueId,
+          },
+        });
+        if (!league) {
+          throw new HttpException(404, 'league id not valid.');
+        }
+      }
       const fixtures = await prisma.fixtures.findMany({
         where: {
           OR: [{ homeId: teamId }, { awayId: teamId }],
@@ -19,12 +37,15 @@ export class FixturesFindByTeamRepository
         include: {
           home: true,
           away: true,
+          league: {
+            select: {
+              name: true,
+            },
+          },
         },
         orderBy: [{ fullTime: 'asc' }, { startDate: 'asc' }],
       });
-      if (fixtures.length === 0) {
-        throw new HttpException(404, 'team id or round not valid.');
-      }
+
       return fixtures;
     } catch (error) {
       if (error instanceof HttpException) {
