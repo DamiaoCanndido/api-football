@@ -31,9 +31,8 @@ export class League {
     if (this.countryId === undefined) {
       this.countryId = null;
     }
-    this.rounds = Array.from(
-      { length: this.numberOfRounds },
-      (_, index) => 'Round ' + (index + 1).toString()
+    this.rounds = Array.from({ length: this.numberOfRounds }, (_, index) =>
+      (index + 1).toString()
     );
   }
 }
