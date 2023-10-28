@@ -19,38 +19,31 @@ describe('Team entity', () => {
 
   test('should return an empty name exception', () => {
     data.name = '';
-    function name(team: Team) {
-      new Team(team.name, team.code, team.type, team.logo);
+    function name() {
+      new Team(data.name, data.code, data.type, data.logo);
     }
-    expect(() => name(data)).toThrowError('Name is incorrect.');
+    expect(() => name()).toThrowError('Name is incorrect.');
   });
 
   test('should return an empty code exception', () => {
-    data.code = '';
-    function code(team: Team) {
-      new Team(team.name, team.code, team.type, team.logo);
+    function code() {
+      new Team(data.name, '', data.type, data.logo);
     }
-    expect(() => code(data)).toThrowError('Code is incorrect.');
+    expect(() => code()).toThrowError('Code is incorrect.');
   });
 
   test('should return an empty type exception', () => {
-    const data = {
-      name: 'Brasil',
-      code: 'BRA',
-      type: null,
-      logo: 'brazil.png',
-    };
-    function country(team: any) {
-      new Team(team.name, team.code, team.type, team.logo);
+    data.type = 'clube' as any;
+    function country() {
+      new Team(data.name, data.code, data.type, data.logo);
     }
-    expect(() => country(data)).toThrowError('type is incorrect.');
+    expect(() => country()).toThrowError('type is incorrect.');
   });
 
   test('should return an empty logo exception', () => {
-    data.logo = '';
-    function logo(team: Team) {
-      new Team(team.name, team.code, team.type, team.logo);
+    function logo() {
+      new Team(data.name, data.code, data.type, '');
     }
-    expect(() => logo(data)).toThrowError('Logo is incorrect.');
+    expect(() => logo()).toThrowError('Logo is incorrect.');
   });
 });
