@@ -1,4 +1,4 @@
-import { test, expect, describe, beforeEach, vi } from 'vitest';
+import { test, expect, describe, beforeEach } from 'vitest';
 import { League } from '../../src/entities';
 
 describe('League entity', () => {
