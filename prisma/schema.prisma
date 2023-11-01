@@ -37,6 +37,7 @@ model League {
   season         String
   rounds         String[]   @default([])
   numberOfRounds Int
+  finished       Boolean    @default(false)
   countryId      String?    @db.ObjectId
   country        Team?      @relation(fields: [countryId], references: [id])
   Fixtures       Fixtures[]

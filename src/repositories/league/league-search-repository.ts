@@ -7,6 +7,7 @@ export class LeagueSearchRepository implements LeagueSearchInterface {
     const leagues = await prisma.league.findMany({
       where: {
         name: { contains: name, mode: 'insensitive' },
+        finished: false,
       },
       orderBy: {
         season: 'desc',

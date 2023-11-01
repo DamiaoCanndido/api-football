@@ -23,6 +23,7 @@ export class LeagueFindbyCountryRepository
               equals: countryId,
             },
           },
+          finished: false,
         },
       });
       return leagues;

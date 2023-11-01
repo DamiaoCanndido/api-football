@@ -9,6 +9,7 @@ export class LeagueFindoneRepository implements LeagueFindoneInterface {
       const league = await prisma.league.findUnique({
         where: {
           id,
+          finished: false,
         },
       });
       if (!league) {
