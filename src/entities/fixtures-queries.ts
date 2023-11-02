@@ -19,10 +19,10 @@ export class FixturesScores {
     if (!this.id || this.id === '') {
       throw new HttpException(400, 'id not valid.');
     }
-    if (!this.homeScore || this.homeScore < 0) {
+    if (typeof this.homeScore === 'undefined' || this.homeScore! < 0) {
       throw new HttpException(400, 'Home score not valid.');
     }
-    if (!this.awayScore || this.awayScore < 0) {
+    if (typeof this.awayScore === 'undefined' || this.awayScore! < 0) {
       throw new HttpException(400, 'Away score not valid.');
     }
     if (this.homePenalty === undefined || this.awayPenalty === undefined) {
