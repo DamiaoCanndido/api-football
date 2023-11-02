@@ -22,7 +22,13 @@ export class FixturesFindByLeagueRepository
       const fixtures = await prisma.fixtures.findMany({
         where: {
           leagueId,
-          round,
+          round: {
+            contains: round,
+            not: {
+              gt: round,
+              lt: round,
+            },
+          },
         },
         include: {
           home: true,
