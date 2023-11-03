@@ -1,5 +1,5 @@
 import { prisma } from '../../infra';
-import { FixturesScores, FixturesOutput, League } from '../../entities';
+import { FixturesScores, FixturesOutput } from '../../entities';
 import { FixturesUpdateScoresInterface } from '../../interfaces/fixtures';
 import { HttpException } from '../../errors';
 
@@ -14,7 +14,11 @@ export class FixturesUpdateScoresRepository
     awayPenalty,
   }: FixturesScores): Promise<FixturesOutput> {
     try {
-      const fixtures = await prisma.fixtures.update({
+      const fixtures = await prisma.fixtures.findUnique({ where: { id } });
+      if (!fixtures) {
+        throw new HttpException(404, 'Fixtures id not found.');
+      }
+      const fixturesCreated = await prisma.fixtures.update({
         where: {
           id,
         },
@@ -30,10 +34,8 @@ export class FixturesUpdateScoresRepository
           away: true,
         },
       });
-      if (!fixtures) {
-        throw new HttpException(404, 'Fixtures id not found.');
-      }
-      return fixtures;
+
+      return fixturesCreated;
     } catch (error) {
       if (error instanceof HttpException) {
         throw new HttpException(error.status, error.message);
