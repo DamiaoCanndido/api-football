@@ -1,6 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import { FixturesUseCase } from '../use-cases';
-import { FixturesInput, FixturesQueries, FixturesScores } from '../entities';
+import {
+  Fixtures,
+  FixturesInput,
+  FixturesQueries,
+  FixturesScores,
+} from '../entities';
 
 export class FixturesController {
   constructor(private fixturesUseCase: FixturesUseCase) {}
@@ -9,14 +14,8 @@ export class FixturesController {
     const fxParam: FixturesInput = req.body;
 
     try {
-      const iFixtures = new FixturesInput(
-        fxParam.startDate,
-        fxParam.homeId,
-        fxParam.awayId,
-        fxParam.leagueId,
-        fxParam.round
-      );
-      const fixtures = await this.fixturesUseCase.add(iFixtures);
+      new Fixtures(fxParam);
+      const fixtures = await this.fixturesUseCase.add(fxParam);
       return res.status(201).json(fixtures);
     } catch (error) {
       next(error);

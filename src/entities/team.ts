@@ -10,6 +10,7 @@ export interface TeamInput {
 }
 
 export interface TeamOutput {
+  id: string;
   name: string;
   code: string;
   type: TeamType;

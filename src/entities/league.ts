@@ -13,6 +13,7 @@ export interface LeagueInput {
 }
 
 export interface LeagueOutput {
+  id: string;
   name: string;
   type: leagueType;
   logo: string;

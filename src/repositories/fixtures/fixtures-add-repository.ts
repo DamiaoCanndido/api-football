@@ -1,11 +1,16 @@
 import { prisma } from '../../infra';
-import { FixturesInput, FixturesOutput, League } from '../../entities';
+import {
+  FixturesInput,
+  FixturesOutput,
+  League,
+  LeagueOutput,
+} from '../../entities';
 import { FixturesAddInterface } from '../../interfaces/fixtures';
 import { HttpException } from '../../errors';
 
 export class FixturesAddRepository implements FixturesAddInterface {
   async add(fxParam: FixturesInput): Promise<FixturesOutput> {
-    let leagueExists: League | null;
+    let leagueExists: LeagueOutput | null;
     try {
       const teamsExists = await prisma.team.findMany({
         where: {
@@ -49,6 +54,11 @@ export class FixturesAddRepository implements FixturesAddInterface {
         include: {
           home: true,
           away: true,
+          league: {
+            select: {
+              name: true,
+            },
+          },
         },
       });
       return fixtures;

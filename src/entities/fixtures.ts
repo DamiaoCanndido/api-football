@@ -1,50 +1,50 @@
 import { HttpException } from '../errors';
-import { Team } from './team';
+import { Team, TeamOutput } from './team';
 
 type League = {
   name: string;
 };
 
-export class FixturesInput {
-  constructor(
-    public startDate: string,
-    public homeId: string,
-    public awayId: string,
-    public leagueId?: string | null,
-    public round?: number | null
-  ) {
-    if (!this.startDate || this.startDate === '') {
+export interface FixturesInput {
+  startDate: string;
+  homeId: string;
+  awayId: string;
+  leagueId?: string | null;
+  round?: number | null;
+}
+
+export interface FixturesOutput {
+  id: string;
+  startDate: Date;
+  home: TeamOutput;
+  away: TeamOutput;
+  leagueId: string | null;
+  round: string | null;
+  league: League | null;
+}
+
+export class Fixtures {
+  constructor(private readonly input: FixturesInput) {
+    if (!this.input.startDate || this.input.startDate === '') {
       throw new HttpException(400, 'Start date is incorrect.');
     }
-    if (!this.homeId || this.homeId === '') {
+    if (!this.input.homeId || this.input.homeId === '') {
       throw new HttpException(400, 'Home team is incorrect.');
     }
-    if (!this.homeId || this.homeId === '') {
+    if (!this.input.homeId || this.input.homeId === '') {
       throw new HttpException(400, 'Home team is incorrect.');
     }
-    if (!this.awayId || this.awayId === '') {
+    if (!this.input.awayId || this.input.awayId === '') {
       throw new HttpException(400, 'Away team is incorrect.');
     }
-    if (this.leagueId === undefined) {
-      this.leagueId = null;
-      this.round = null;
+    if (this.input.leagueId === undefined) {
+      this.input.leagueId = null;
+      this.input.round = null;
     }
-    if (this.leagueId) {
-      if (!this.round || this.round <= 0) {
+    if (this.input.leagueId) {
+      if (!this.input.round || this.input.round <= 0) {
         throw new HttpException(400, 'Rounds is incorrect.');
       }
     }
   }
-}
-
-export class FixturesOutput {
-  constructor(
-    public id: string,
-    public startDate: Date,
-    public home: Team,
-    public away: Team,
-    public leagueId?: string | null,
-    public round?: string | null,
-    public league?: League | null
-  ) {}
 }
