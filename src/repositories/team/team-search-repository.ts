@@ -1,9 +1,9 @@
 import { prisma } from '../../infra';
-import { Team, TeamQueries } from '../../entities';
+import { TeamOutput, TeamQueries } from '../../entities';
 import { TeamSearchInterface } from '../../interfaces/team';
 
 export class TeamSearchRepository implements TeamSearchInterface {
-  async search({ code, name, type }: TeamQueries): Promise<Team[]> {
+  async search({ code, name, type }: TeamQueries): Promise<TeamOutput[]> {
     const teams = await prisma.team.findMany({
       where: {
         name: {

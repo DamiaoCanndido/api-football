@@ -1,9 +1,9 @@
 import { prisma } from '../../infra';
-import { League, LeagueQueries } from '../../entities';
+import { League, LeagueOutput, LeagueQueries } from '../../entities';
 import { LeagueSearchInterface } from '../../interfaces/league';
 
 export class LeagueSearchRepository implements LeagueSearchInterface {
-  async search({ name }: LeagueQueries): Promise<League[]> {
+  async search({ name }: LeagueQueries): Promise<LeagueOutput[]> {
     const leagues = await prisma.league.findMany({
       where: {
         name: { contains: name, mode: 'insensitive' },

@@ -2,37 +2,50 @@ import { HttpException } from '../errors';
 
 export type leagueType = 'league' | 'cup';
 
+export interface LeagueInput {
+  name: string;
+  type: leagueType;
+  logo: string;
+  season: string;
+  numberOfRounds: number;
+  rounds?: string[];
+  countryId?: string | null;
+}
+
+export interface LeagueOutput {
+  name: string;
+  type: leagueType;
+  logo: string;
+  season: string;
+  numberOfRounds: number;
+  rounds: string[];
+  countryId: string | null;
+}
+
 export class League {
-  constructor(
-    public name: string,
-    public type: leagueType,
-    public logo: string,
-    public season: string,
-    public numberOfRounds: number,
-    public rounds: string[],
-    public countryId?: string | null
-  ) {
-    if (!this.name || this.name.length < 5) {
+  constructor(private readonly input: LeagueInput) {
+    if (!this.input.name || this.input.name.length < 5) {
       throw new HttpException(400, 'Name is incorrect.');
     }
-    if (this.type === 'cup' || this.type === 'league') {
+    if (this.input.type === 'cup' || this.input.type === 'league') {
     } else {
       throw new HttpException(400, 'Type is incorrect.');
     }
-    if (!this.logo || this.logo.length < 3) {
+    if (!this.input.logo || this.input.logo.length < 3) {
       throw new HttpException(400, 'Logo is incorrect.');
     }
-    if (!this.season || this.season.length < 9) {
+    if (!this.input.season || this.input.season.length < 9) {
       throw new HttpException(400, 'Season is incorrect.');
     }
-    if (!this.numberOfRounds || this.numberOfRounds <= 0) {
+    if (!this.input.numberOfRounds || this.input.numberOfRounds <= 0) {
       throw new HttpException(400, 'number of rounds is incorrect.');
     }
-    if (this.countryId === undefined) {
-      this.countryId = null;
+    if (this.input.countryId === undefined) {
+      this.input.countryId = null;
     }
-    this.rounds = Array.from({ length: this.numberOfRounds }, (_, index) =>
-      (index + 1).toString()
+    this.input.rounds = Array.from(
+      { length: this.input.numberOfRounds },
+      (_, index) => (index + 1).toString()
     );
   }
 }

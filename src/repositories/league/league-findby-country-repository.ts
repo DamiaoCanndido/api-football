@@ -1,12 +1,12 @@
 import { prisma } from '../../infra';
-import { League } from '../../entities';
+import { LeagueOutput } from '../../entities';
 import { LeagueFindbyCountryInterface } from '../../interfaces/league';
 import { HttpException } from '../../errors';
 
 export class LeagueFindbyCountryRepository
   implements LeagueFindbyCountryInterface
 {
-  async findByCountry(countryId: string): Promise<League[]> {
+  async findByCountry(countryId: string): Promise<LeagueOutput[]> {
     try {
       const country = await prisma.team.findUnique({
         where: {

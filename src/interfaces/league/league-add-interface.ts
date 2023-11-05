@@ -1,5 +1,5 @@
-import { League } from '../../entities';
+import { LeagueInput, LeagueOutput } from '../../entities';
 
 export interface LeagueAddInterface {
-  add: (league: League) => Promise<League>;
+  add: (league: LeagueInput) => Promise<LeagueOutput>;
 }

@@ -1,10 +1,10 @@
 import { prisma } from '../../infra';
-import { Team } from '../../entities';
+import { TeamOutput } from '../../entities';
 import { TeamFindByLeagueInterface } from '../../interfaces/team';
 import { HttpException } from '../../errors';
 
 export class TeamFindByLeagueRepository implements TeamFindByLeagueInterface {
-  async findByLeague(leagueId: string): Promise<Team[]> {
+  async findByLeague(leagueId: string): Promise<TeamOutput[]> {
     try {
       const teams = await prisma.team.findMany({
         where: {

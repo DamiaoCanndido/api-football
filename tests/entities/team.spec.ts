@@ -1,8 +1,8 @@
 import { test, expect, describe, beforeEach } from 'vitest';
-import { Team } from '../../src/entities';
+import { Team, TeamProps } from '../../src/entities';
 
 describe('Team entity', () => {
-  let data: Team;
+  let data: TeamProps;
   beforeEach(() => {
     data = {
       name: 'Brasil',
@@ -13,21 +13,22 @@ describe('Team entity', () => {
   });
 
   test('should create only with team data', () => {
-    const sut = new Team(data.name, data.code, data.type, data.logo);
-    expect(sut).toEqual(data);
+    const sut = new Team(data);
+    expect(sut).toBeInstanceOf(Team);
   });
 
   test('should return an empty name exception', () => {
     data.name = '';
     function name() {
-      new Team(data.name, data.code, data.type, data.logo);
+      new Team(data);
     }
     expect(() => name()).toThrowError('Name is incorrect.');
   });
 
   test('should return an empty code exception', () => {
+    data.code = '';
     function code() {
-      new Team(data.name, '', data.type, data.logo);
+      new Team(data);
     }
     expect(() => code()).toThrowError('Code is incorrect.');
   });
@@ -35,14 +36,15 @@ describe('Team entity', () => {
   test('should return an empty type exception', () => {
     data.type = 'clube' as any;
     function country() {
-      new Team(data.name, data.code, data.type, data.logo);
+      new Team(data);
     }
     expect(() => country()).toThrowError('type is incorrect.');
   });
 
   test('should return an empty logo exception', () => {
+    data.logo = '';
     function logo() {
-      new Team(data.name, data.code, data.type, '');
+      new Team(data);
     }
     expect(() => logo()).toThrowError('Logo is incorrect.');
   });

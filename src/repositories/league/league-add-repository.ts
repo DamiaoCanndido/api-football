@@ -1,10 +1,10 @@
 import { prisma } from '../../infra';
-import { League } from '../../entities';
+import { LeagueInput, LeagueOutput } from '../../entities';
 import { LeagueAddInterface } from '../../interfaces/league';
 import { HttpException } from '../../errors';
 
 export class LeagueAddRepository implements LeagueAddInterface {
-  async add(lgParam: League): Promise<League> {
+  async add(lgParam: LeagueInput): Promise<LeagueOutput> {
     try {
       if (lgParam.countryId) {
         const countryExists = await prisma.team.findUnique({

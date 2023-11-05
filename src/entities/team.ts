@@ -2,28 +2,37 @@ import { HttpException } from '../errors';
 
 export type TeamType = 'club' | 'selection' | 'amateur';
 
+export interface TeamInput {
+  name: string;
+  code: string;
+  type: TeamType;
+  logo: string;
+}
+
+export interface TeamOutput {
+  name: string;
+  code: string;
+  type: TeamType;
+  logo: string;
+}
+
 export class Team {
-  constructor(
-    public name: string,
-    public code: string,
-    public type: TeamType,
-    public logo: string
-  ) {
-    if (!this.name || this.name.length < 3) {
+  constructor(private readonly input: TeamInput) {
+    if (!this.input.name || this.input.name.length < 3) {
       throw new HttpException(400, 'Name is incorrect.');
     }
-    if (!this.code || this.code.length !== 3) {
+    if (!this.input.code || this.input.code.length !== 3) {
       throw new HttpException(400, 'Code is incorrect.');
     }
     if (
-      this.type === 'club' ||
-      this.type === 'amateur' ||
-      this.type === 'selection'
+      this.input.type === 'club' ||
+      this.input.type === 'amateur' ||
+      this.input.type === 'selection'
     ) {
     } else {
       throw new HttpException(400, 'type is incorrect.');
     }
-    if (!this.logo || this.logo.length < 3) {
+    if (!this.input.logo || this.input.logo.length < 3) {
       throw new HttpException(400, 'Logo is incorrect.');
     }
   }

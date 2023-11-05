@@ -1,24 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
 import { LeagueUseCase } from '../use-cases';
-import { League, LeagueQueries } from '../entities';
+import { League, LeagueInput, LeagueQueries } from '../entities';
 
 export class LeagueController {
   constructor(private leagueUseCase: LeagueUseCase) {}
 
   async add(req: Request, res: Response, next: NextFunction) {
-    const lg: League = req.body;
+    const param: LeagueInput = req.body;
 
     try {
-      const league = new League(
-        lg.name,
-        lg.type,
-        lg.logo,
-        lg.season,
-        lg.numberOfRounds,
-        lg.rounds,
-        lg.countryId
-      );
-      const country = await this.leagueUseCase.add(league);
+      new League(param);
+      const country = await this.leagueUseCase.add(param);
       return res.status(201).json(country);
     } catch (error) {
       next(error);

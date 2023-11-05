@@ -1,5 +1,5 @@
-import { Team } from '../../entities';
+import { TeamOutput } from '../../entities';
 
 export interface TeamFindoneInterface {
-  findOne: (id: string) => Promise<Team>;
+  findOne: (id: string) => Promise<TeamOutput>;
 }

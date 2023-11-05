@@ -1,5 +1,5 @@
-import { League } from '../../entities';
+import { LeagueOutput } from '../../entities';
 
 export interface LeagueFindbyCountryInterface {
-  findByCountry: (countryId: string) => Promise<League[]>;
+  findByCountry: (countryId: string) => Promise<LeagueOutput[]>;
 }

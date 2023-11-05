@@ -1,10 +1,10 @@
 import { prisma } from '../../infra';
-import { Team } from '../../entities';
+import { TeamOutput } from '../../entities';
 import { TeamFindoneInterface } from '../../interfaces/team';
 import { HttpException } from '../../errors';
 
 export class TeamFindoneRepository implements TeamFindoneInterface {
-  async findOne(id: string): Promise<Team> {
+  async findOne(id: string): Promise<TeamOutput> {
     try {
       const team = await prisma.team.findUnique({
         where: {

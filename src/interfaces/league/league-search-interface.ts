@@ -1,5 +1,5 @@
-import { League, LeagueQueries } from '../../entities';
+import { LeagueOutput, LeagueQueries } from '../../entities';
 
 export interface LeagueSearchInterface {
-  search: (league: LeagueQueries) => Promise<League[]>;
+  search: (league: LeagueQueries) => Promise<LeagueOutput[]>;
 }

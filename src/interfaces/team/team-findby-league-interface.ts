@@ -1,5 +1,5 @@
-import { Team } from '../../entities';
+import { TeamOutput } from '../../entities';
 
 export interface TeamFindByLeagueInterface {
-  findByLeague: (leagueId: string) => Promise<Team[]>;
+  findByLeague: (leagueId: string) => Promise<TeamOutput[]>;
 }

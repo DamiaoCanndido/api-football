@@ -1,5 +1,5 @@
-import { Team } from '../../entities';
+import { TeamInput, TeamOutput } from '../../entities';
 
 export interface TeamAddInterface {
-  add: (team: Team) => Promise<Team>;
+  add: (team: TeamInput) => Promise<TeamOutput>;
 }

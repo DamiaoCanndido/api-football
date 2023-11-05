@@ -1,15 +1,15 @@
 import { Request, Response, NextFunction } from 'express';
 import { TeamUseCase } from '../use-cases';
-import { Team, TeamQueries } from '../entities';
+import { Team, TeamInput, TeamQueries } from '../entities';
 
 export class TeamController {
   constructor(private teamUseCase: TeamUseCase) {}
 
   async add(req: Request, res: Response, next: NextFunction) {
-    const param: Team = req.body;
+    const param: TeamInput = req.body;
     try {
-      const iTeam = new Team(param.name, param.code, param.type, param.logo);
-      const team = await this.teamUseCase.add(iTeam);
+      new Team(param);
+      const team = await this.teamUseCase.add(param);
       return res.status(201).json(team);
     } catch (error) {
       next(error);

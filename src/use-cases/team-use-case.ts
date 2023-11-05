@@ -1,4 +1,4 @@
-import { Team, TeamQueries } from '../entities';
+import { Team, TeamInput, TeamQueries } from '../entities';
 import {
   TeamAddInterface,
   TeamSearchInterface,
@@ -20,7 +20,7 @@ export class TeamUseCase
     private findbyLeagueRepo: TeamFindByLeagueInterface
   ) {}
 
-  async add(team: Team) {
+  async add(team: TeamInput) {
     const result = await this.addRepo.add(team);
     return result;
   }
