@@ -6,6 +6,12 @@ import { HttpException } from '../../errors';
 export class TeamFindByLeagueRepository implements TeamFindByLeagueInterface {
   async findByLeague(leagueId: string): Promise<TeamOutput[]> {
     try {
+      const league = await prisma.league.findUnique({
+        where: { id: leagueId },
+      });
+      if (!league) {
+        throw new HttpException(404, 'League id invalid.');
+      }
       const teams = await prisma.team.findMany({
         where: {
           OR: [
@@ -14,9 +20,6 @@ export class TeamFindByLeagueRepository implements TeamFindByLeagueInterface {
           ],
         },
       });
-      if (teams.length < 1) {
-        throw new HttpException(404, 'League id invalid.');
-      }
       return teams;
     } catch (error) {
       if (error instanceof HttpException) {

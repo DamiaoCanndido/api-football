@@ -1,4 +1,4 @@
-import { Team, TeamInput, TeamQueries } from '../entities';
+import { TeamInput, TeamQueries } from '../entities';
 import {
   TeamAddInterface,
   TeamSearchInterface,

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/main/main.ts",
-    "test": "vitest --ui",
+    "test": "vitest --ui --api 9527",
     "coverage": "vitest run --coverage"
   },
   "keywords": [],

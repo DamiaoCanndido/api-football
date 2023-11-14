@@ -1,8 +1,8 @@
 import { test, expect, describe, beforeEach } from 'vitest';
-import { Team, TeamProps } from '../../src/entities';
+import { Team, TeamInput } from '../../src/entities';
 
 describe('Team entity', () => {
-  let data: TeamProps;
+  let data: TeamInput;
   beforeEach(() => {
     data = {
       name: 'Brasil',
