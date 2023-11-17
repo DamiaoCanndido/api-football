@@ -32,6 +32,11 @@ export class FixturesUpdateScoresRepository
         include: {
           home: true,
           away: true,
+          league: {
+            select: {
+              name: true,
+            },
+          },
         },
       });
 
