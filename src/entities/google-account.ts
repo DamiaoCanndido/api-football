@@ -9,7 +9,7 @@ export interface GoogleAccountOutput {
   googleId: string;
   name: string;
   email: string;
-  picture: string;
+  picture?: string | null;
 }
 
 export class GoogleAccount {
