@@ -1,4 +1,5 @@
 import { prisma } from '../../infra';
+import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import { GoogleAccountInput, GoogleAccountOutput } from '../../entities';
 import { GoogleAccountInterface } from '../../interfaces/google-account';
@@ -29,7 +30,10 @@ export class GoogleAccountRepository implements GoogleAccountInterface {
           },
         });
       }
-      return user;
+      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, {
+        expiresIn: 60,
+      });
+      return { token };
     } catch (error) {
       if (error instanceof HttpException) {
         throw new HttpException(error.status, error.message);

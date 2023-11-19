@@ -5,11 +5,7 @@ export interface GoogleAccountInput {
 }
 
 export interface GoogleAccountOutput {
-  id: string;
-  googleId: string;
-  name: string;
-  email: string;
-  picture?: string | null;
+  token: string;
 }
 
 export class GoogleAccount {

@@ -11,7 +11,7 @@ type Player = {
   name: string;
   picture: string;
   points: number;
-  guess: Guess;
+  guess?: Guess; // TODO:
   isAlive: boolean;
 };
 
