@@ -77,7 +77,7 @@ type Guess {
 type Player {
   id      String  @db.ObjectId
   name    String
-  picture String
+  picture String?
   points  Int
   guess   Guess?
   isAlive Boolean @default(true)

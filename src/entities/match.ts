@@ -1,17 +1,16 @@
 import { HttpException } from '../errors';
-import { FixturesOutput } from './fixtures';
 
 type Guess = {
   home: number;
   away: number;
-};
+} | null;
 
 type Player = {
   id: string;
   name: string;
-  picture: string;
+  picture: string | null;
   points: number;
-  guess?: Guess; // TODO:
+  guess: Guess;
   isAlive: boolean;
 };
 
@@ -27,8 +26,6 @@ export interface MatchOutput {
   drawers: Player[];
   losers: Player[];
   fixturesId: string;
-  fixtures: FixturesOutput;
-  createdAt: Date;
 }
 
 export class Match {
