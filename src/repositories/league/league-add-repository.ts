@@ -15,6 +15,9 @@ export class LeagueAddRepository implements LeagueAddInterface {
         if (!countryExists) {
           throw new HttpException(404, 'country id not valid.');
         }
+        if (countryExists.type !== 'selection') {
+          throw new HttpException(400, 'This is not a country.');
+        }
       }
 
       const league = await prisma.league.create({

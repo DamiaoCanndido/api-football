@@ -16,6 +16,9 @@ export class LeagueFindbyCountryRepository
       if (!country) {
         throw new HttpException(400, 'Country id invalid.');
       }
+      if (country.type !== 'selection') {
+        throw new HttpException(400, 'This is not a country.');
+      }
       const leagues = await prisma.league.findMany({
         where: {
           country: {

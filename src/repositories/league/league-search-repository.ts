@@ -1,5 +1,5 @@
 import { prisma } from '../../infra';
-import { League, LeagueOutput, LeagueQueries } from '../../entities';
+import { LeagueOutput, LeagueQueries } from '../../entities';
 import { LeagueSearchInterface } from '../../interfaces/league';
 
 export class LeagueSearchRepository implements LeagueSearchInterface {
