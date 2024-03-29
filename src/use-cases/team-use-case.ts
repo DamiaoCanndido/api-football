@@ -1,9 +1,10 @@
-import { TeamInput, TeamQueries } from '../entities';
+import { TeamInput, TeamQueries, TeamUpdate } from '../entities';
 import {
   TeamAddInterface,
   TeamSearchInterface,
   TeamFindoneInterface,
   TeamFindByLeagueInterface,
+  TeamUpdateInterface,
 } from '../interfaces/team';
 
 export class TeamUseCase
@@ -11,14 +12,17 @@ export class TeamUseCase
     TeamAddInterface,
     TeamSearchInterface,
     TeamFindoneInterface,
-    TeamFindByLeagueInterface
+    TeamFindByLeagueInterface,
+    TeamUpdateInterface
 {
   constructor(
     private addRepo: TeamAddInterface,
     private searchRepo: TeamSearchInterface,
     private findoneRepo: TeamFindoneInterface,
-    private findbyLeagueRepo: TeamFindByLeagueInterface
+    private findbyLeagueRepo: TeamFindByLeagueInterface,
+    private updateRepo: TeamUpdateInterface
   ) {}
+  
 
   async add(team: TeamInput) {
     const result = await this.addRepo.add(team);
@@ -39,4 +43,9 @@ export class TeamUseCase
     const result = await this.findbyLeagueRepo.findByLeague(leagueId);
     return result;
   }
+
+  async update (id: string, team: TeamUpdate) {
+    const result = await this.updateRepo.update(id, team);
+    return result;
+  };
 }

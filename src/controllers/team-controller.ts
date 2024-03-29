@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import { TeamUseCase } from '../use-cases';
-import { Team, TeamInput, TeamQueries } from '../entities';
+import { Team, TeamInput, TeamQueries, TeamUpdate } from '../entities';
 
 export class TeamController {
   constructor(private teamUseCase: TeamUseCase) {}
 
+  // POST: /team
   async add(req: Request, res: Response, next: NextFunction) {
     const param: TeamInput = req.body;
     try {
@@ -16,6 +17,7 @@ export class TeamController {
     }
   }
 
+  // GET: /team?name=&code=%type=
   async search(req: Request, res: Response, next: NextFunction) {
     const { name, code, type }: TeamQueries = req.query;
     try {
@@ -30,6 +32,7 @@ export class TeamController {
     }
   }
 
+  // GET: /team/:id
   async findOne(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
@@ -40,10 +43,23 @@ export class TeamController {
     }
   }
 
+  // GET: /team/:leagueId/league
   async findByLeague(req: Request, res: Response, next: NextFunction) {
     const { leagueId } = req.params;
     try {
       const teams = await this.teamUseCase.findByLeague(leagueId);
+      return res.status(200).json(teams);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  // PUT: /team/:id
+  async updateTeam(req: Request, res: Response, next: NextFunction) {
+    const { id } = req.params;
+    const params: TeamUpdate = req.body;
+    try {
+      const teams = await this.teamUseCase.update(id, params);
       return res.status(200).json(teams);
     } catch (error) {
       next(error);

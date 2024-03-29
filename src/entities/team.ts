@@ -17,6 +17,13 @@ export interface TeamOutput {
   logo: string;
 }
 
+export interface TeamUpdate {
+  name?: string;
+  code?: string;
+  type?: TeamType;
+  logo?: string;
+}
+
 export class Team {
   constructor(private readonly input: TeamInput) {
     if (!this.input.name || this.input.name.length < 3) {
