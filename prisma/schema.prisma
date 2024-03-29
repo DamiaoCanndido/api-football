@@ -58,38 +58,6 @@ model Fixtures {
   awayScore   Int?
   homePenalty Int?
   awayPenalty Int?
-  Match       Match[]
 }
 
-model GoogleAccount {
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
-  googleId String  @unique
-  name     String
-  email    String  @unique
-  picture  String?
-}
 
-type Guess {
-  home Int
-  away Int
-}
-
-type Player {
-  id      String  @db.ObjectId
-  name    String
-  picture String?
-  points  Int
-  guess   Guess?
-  isAlive Boolean @default(true)
-}
-
-model Match {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  players    Player[]
-  winners    Player[]
-  drawers    Player[]
-  losers     Player[]
-  createdAt  DateTime @default(now())
-  fixtures   Fixtures @relation(fields: [fixturesId], references: [id])
-  fixturesId String   @db.ObjectId
-}

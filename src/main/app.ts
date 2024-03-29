@@ -5,7 +5,6 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 import { errorMiddleware } from '../middlewares';
 import { TeamRoutes, LeagueRoutes, FixturesRoutes } from '../routes';
-import { GoogleAccountRoutes } from '../routes/google-account-routes';
 
 dotenv.config();
 
@@ -13,7 +12,6 @@ export class App {
   private teamRoutes = new TeamRoutes();
   private leagueRoutes = new LeagueRoutes();
   private fixturesRoutes = new FixturesRoutes();
-  private gAccount = new GoogleAccountRoutes();
 
   public app: Application;
   public server: Server;
@@ -45,7 +43,6 @@ export class App {
     this.app.use('/team', this.teamRoutes.router);
     this.app.use('/league', this.leagueRoutes.router);
     this.app.use('/fixtures', this.fixturesRoutes.router);
-    this.app.use('/signin', this.gAccount.router);
   }
 
   errorInterception() {
