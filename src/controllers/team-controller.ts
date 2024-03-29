@@ -55,11 +55,22 @@ export class TeamController {
   }
 
   // PUT: /team/:id
-  async updateTeam(req: Request, res: Response, next: NextFunction) {
+  async update(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
     const params: TeamUpdate = req.body;
     try {
       const teams = await this.teamUseCase.update(id, params);
+      return res.status(200).json(teams);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  // DELETE: /team/:id
+  async delete(req: Request, res: Response, next: NextFunction) {
+    const { id } = req.params;
+    try {
+      const teams = await this.teamUseCase.delete(id);
       return res.status(200).json(teams);
     } catch (error) {
       next(error);

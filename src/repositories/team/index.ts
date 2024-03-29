@@ -3,3 +3,4 @@ export * from './team-search-repository';
 export * from './team-findone-repository';
 export * from './team-findby-league-repository';
 export * from './team-update-repository';
+export * from './team-delete-repository';

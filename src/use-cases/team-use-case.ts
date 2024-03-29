@@ -5,6 +5,7 @@ import {
   TeamFindoneInterface,
   TeamFindByLeagueInterface,
   TeamUpdateInterface,
+  TeamDeleteInterface,
 } from '../interfaces/team';
 
 export class TeamUseCase
@@ -13,16 +14,17 @@ export class TeamUseCase
     TeamSearchInterface,
     TeamFindoneInterface,
     TeamFindByLeagueInterface,
-    TeamUpdateInterface
+    TeamUpdateInterface,
+    TeamDeleteInterface
 {
   constructor(
     private addRepo: TeamAddInterface,
     private searchRepo: TeamSearchInterface,
     private findoneRepo: TeamFindoneInterface,
     private findbyLeagueRepo: TeamFindByLeagueInterface,
-    private updateRepo: TeamUpdateInterface
+    private updateRepo: TeamUpdateInterface,
+    private deleteRepo: TeamDeleteInterface
   ) {}
-  
 
   async add(team: TeamInput) {
     const result = await this.addRepo.add(team);
@@ -44,8 +46,13 @@ export class TeamUseCase
     return result;
   }
 
-  async update (id: string, team: TeamUpdate) {
+  async update(id: string, team: TeamUpdate) {
     const result = await this.updateRepo.update(id, team);
     return result;
-  };
+  }
+
+  async delete(id: string) {
+    const results = await this.deleteRepo.delete(id);
+    return results;
+  }
 }
