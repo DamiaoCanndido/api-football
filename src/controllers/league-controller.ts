@@ -48,4 +48,14 @@ export class LeagueController {
       next(error);
     }
   }
+
+  async delete(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const league = await this.leagueUseCase.delete(id);
+      return res.status(200).json(league);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

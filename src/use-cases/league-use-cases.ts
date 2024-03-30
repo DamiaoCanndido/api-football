@@ -4,6 +4,7 @@ import {
   LeagueSearchInterface,
   LeagueFindoneInterface,
   LeagueFindbyCountryInterface,
+  LeagueDeleteInterface,
 } from '../interfaces/league';
 
 export class LeagueUseCase
@@ -11,13 +12,15 @@ export class LeagueUseCase
     LeagueAddInterface,
     LeagueSearchInterface,
     LeagueFindoneInterface,
-    LeagueFindbyCountryInterface
+    LeagueFindbyCountryInterface,
+    LeagueDeleteInterface
 {
   constructor(
     private addRepo: LeagueAddInterface,
     private searchRepo: LeagueSearchInterface,
     private findoneRepo: LeagueFindoneInterface,
-    private findbyCountryRepo: LeagueFindbyCountryInterface
+    private findbyCountryRepo: LeagueFindbyCountryInterface,
+    private deleteRepo: LeagueDeleteInterface
   ) {}
 
   async add(league: LeagueInput) {
@@ -37,6 +40,11 @@ export class LeagueUseCase
 
   async findByCountry(countryId: string) {
     const result = await this.findbyCountryRepo.findByCountry(countryId);
+    return result;
+  }
+
+  async delete(id: string) {
+    const result = await this.deleteRepo.delete(id);
     return result;
   }
 }
