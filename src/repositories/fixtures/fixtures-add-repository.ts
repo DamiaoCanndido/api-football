@@ -1,10 +1,6 @@
 import { prisma } from '../../infra';
-import {
-  FixturesInput,
-  FixturesOutput,
-  League,
-  LeagueOutput,
-} from '../../entities';
+import { dateNow } from '../../helpers';
+import { FixturesInput, FixturesOutput, LeagueOutput } from '../../entities';
 import { FixturesAddInterface } from '../../interfaces/fixtures';
 import { HttpException } from '../../errors';
 
@@ -34,8 +30,6 @@ export class FixturesAddRepository implements FixturesAddInterface {
           throw new HttpException(404, 'league id not valid.');
         }
       }
-
-      const dateNow = Date.now() - new Date().getTimezoneOffset() * 60 * 1000;
 
       if (new Date(fxParam.startDate).getTime() < dateNow) {
         throw new HttpException(400, 'start date not valid.');

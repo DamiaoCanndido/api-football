@@ -88,4 +88,16 @@ export class FixturesController {
       next(error);
     }
   }
+
+  async reschelude(req: Request, res: Response, next: NextFunction) {
+    const { id } = req.params;
+    const { startDate }: FixturesInput = req.body;
+
+    try {
+      const fixtures = await this.fixturesUseCase.reschedule(id, startDate);
+      return res.status(200).json(fixtures);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

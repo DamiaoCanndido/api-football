@@ -4,6 +4,7 @@ import {
   FixturesFindByLeagueInterface,
   FixturesFindByTeamInterface,
   FixturesGroupByDatesInterface,
+  FixturesRescheduledInterface,
   FixturesUpdateScoresInterface,
 } from '../interfaces/fixtures';
 import { FixturesInput, FixturesQueries, FixturesScores } from '../entities';
@@ -15,7 +16,8 @@ export class FixturesUseCase
     FixturesFindByTeamInterface,
     FixturesUpdateScoresInterface,
     FixturesGroupByDatesInterface,
-    FixturesDeleteInterface
+    FixturesDeleteInterface,
+    FixturesRescheduledInterface
 {
   constructor(
     private addFxRepo: FixturesAddInterface,
@@ -23,7 +25,8 @@ export class FixturesUseCase
     private findByTeamRepo: FixturesFindByTeamInterface,
     private updateScoresRepo: FixturesUpdateScoresInterface,
     private groupByDateRepo: FixturesGroupByDatesInterface,
-    private deleteRepo: FixturesDeleteInterface
+    private deleteRepo: FixturesDeleteInterface,
+    private rescheduledRepo: FixturesRescheduledInterface
   ) {}
 
   async add(fixture: FixturesInput) {
@@ -53,6 +56,11 @@ export class FixturesUseCase
 
   async delete(id: string) {
     const result = await this.deleteRepo.delete(id);
+    return result;
+  }
+
+  async reschedule(id: string, startDate: string) {
+    const result = await this.rescheduledRepo.reschedule(id, startDate);
     return result;
   }
 }

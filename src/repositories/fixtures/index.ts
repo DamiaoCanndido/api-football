@@ -4,3 +4,4 @@ export * from './fixtures-findby-team-repository';
 export * from './fixtures-update-scores-repository';
 export * from './fixtures-groupby-dates-repository';
 export * from './fixtures-delete-repository';
+export * from './fixtures-rescheduled-repository';
