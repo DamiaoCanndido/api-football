@@ -1,5 +1,6 @@
 import {
   FixturesAddInterface,
+  FixturesDeleteInterface,
   FixturesFindByLeagueInterface,
   FixturesFindByTeamInterface,
   FixturesGroupByDatesInterface,
@@ -13,15 +14,18 @@ export class FixturesUseCase
     FixturesFindByLeagueInterface,
     FixturesFindByTeamInterface,
     FixturesUpdateScoresInterface,
-    FixturesGroupByDatesInterface
+    FixturesGroupByDatesInterface,
+    FixturesDeleteInterface
 {
   constructor(
     private addFxRepo: FixturesAddInterface,
     private findByLeagueRepo: FixturesFindByLeagueInterface,
     private findByTeamRepo: FixturesFindByTeamInterface,
     private updateScoresRepo: FixturesUpdateScoresInterface,
-    private groupByDateRepo: FixturesGroupByDatesInterface
+    private groupByDateRepo: FixturesGroupByDatesInterface,
+    private deleteRepo: FixturesDeleteInterface
   ) {}
+
   async add(fixture: FixturesInput) {
     const result = await this.addFxRepo.add(fixture);
     return result;
@@ -44,6 +48,11 @@ export class FixturesUseCase
 
   async groupByDates() {
     const result = await this.groupByDateRepo.groupByDates();
+    return result;
+  }
+
+  async delete(id: string) {
+    const result = await this.deleteRepo.delete(id);
     return result;
   }
 }

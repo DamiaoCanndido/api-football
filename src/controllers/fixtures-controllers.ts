@@ -78,4 +78,14 @@ export class FixturesController {
       next(error);
     }
   }
+
+  async delete(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const fixtures = await this.fixturesUseCase.delete(id);
+      return res.status(200).json(fixtures);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
