@@ -9,10 +9,12 @@ import {
 } from '../repositories/team';
 import { TeamUseCase } from '../use-cases';
 import { TeamController } from '../controllers';
+import { AuthMiddleware } from '../middlewares';
 
 export class TeamRoutes {
   public router: Router;
   private teamController: TeamController;
+  private auth = new AuthMiddleware();
 
   constructor() {
     this.router = Router();
@@ -35,7 +37,11 @@ export class TeamRoutes {
   }
 
   initRoutes() {
-    this.router.post('/', this.teamController.add.bind(this.teamController));
+    this.router.post(
+      '/',
+      this.auth.protect,
+      this.teamController.add.bind(this.teamController)
+    );
     this.router.get('/', this.teamController.search.bind(this.teamController));
     this.router.get(
       '/:id',
