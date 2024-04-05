@@ -1,6 +1,5 @@
-import express, { Application } from 'express';
-import { createServer, Server } from 'http';
-import { Server as SocketIO } from 'socket.io';
+import express from 'express';
+import { app, server, initializeSocket } from '../ws';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
 import { errorMiddleware } from '../middlewares';
@@ -13,49 +12,30 @@ export class App {
   private leagueRoutes = new LeagueRoutes();
   private fixturesRoutes = new FixturesRoutes();
 
-  public app: Application;
-  public server: Server;
-  public io: SocketIO;
-
   constructor() {
-    this.app = express();
-    this.server = createServer(this.app);
-    this.io = new SocketIO(this.server);
     this.middlewaresInitialize();
     this.routesInitialize();
-    this.initializeSocket();
+    initializeSocket();
     this.errorInterception();
   }
 
-  initializeSocket() {
-    this.io.on('connection', (socket) => {
-      console.log('Im Online!');
-      socket.on('disconnect', () => {
-        console.log('Im Offline!');
-      });
-      socket.on('update-score', (id: string) => {
-        console.log(socket.id, id);
-      });
-    });
-  }
-
   routesInitialize() {
-    this.app.use('/team', this.teamRoutes.router);
-    this.app.use('/league', this.leagueRoutes.router);
-    this.app.use('/fixtures', this.fixturesRoutes.router);
+    app.use('/team', this.teamRoutes.router);
+    app.use('/league', this.leagueRoutes.router);
+    app.use('/fixtures', this.fixturesRoutes.router);
   }
 
   errorInterception() {
-    this.app.use(errorMiddleware);
+    app.use(errorMiddleware);
   }
 
   middlewaresInitialize() {
-    this.app.use(cors());
-    this.app.use(express.json());
-    this.app.use(express.urlencoded({ extended: true }));
+    app.use(cors());
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
   }
 
   listen() {
-    this.server.listen(3333, () => console.log('Server is running...'));
+    server.listen(3333, () => console.log('Server is running...'));
   }
 }
