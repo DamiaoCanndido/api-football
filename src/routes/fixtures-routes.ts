@@ -10,10 +10,12 @@ import {
 } from '../repositories/fixtures';
 import { FixturesUseCase } from '../use-cases';
 import { FixturesController } from '../controllers';
+import { AuthMiddleware } from '../middlewares';
 
 export class FixturesRoutes {
   public router: Router;
   private fixturesController: FixturesController;
+  private auth = new AuthMiddleware();
 
   constructor() {
     this.router = Router();
@@ -40,6 +42,7 @@ export class FixturesRoutes {
   initRoutes() {
     this.router.post(
       '/',
+      this.auth.protect,
       this.fixturesController.add.bind(this.fixturesController)
     );
     this.router.get(
@@ -52,6 +55,7 @@ export class FixturesRoutes {
     );
     this.router.put(
       '/:id',
+      this.auth.protect,
       this.fixturesController.updateScores.bind(this.fixturesController)
     );
     this.router.get(
@@ -60,10 +64,12 @@ export class FixturesRoutes {
     );
     this.router.delete(
       '/:id',
+      this.auth.protect,
       this.fixturesController.delete.bind(this.fixturesController)
     );
     this.router.patch(
       '/:id',
+      this.auth.protect,
       this.fixturesController.reschelude.bind(this.fixturesController)
     );
   }

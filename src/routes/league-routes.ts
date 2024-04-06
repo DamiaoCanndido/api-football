@@ -8,10 +8,12 @@ import {
 } from '../repositories/league';
 import { LeagueUseCase } from '../use-cases';
 import { LeagueController } from '../controllers';
+import { AuthMiddleware } from '../middlewares';
 
 export class LeagueRoutes {
   public router: Router;
   private leagueController: LeagueController;
+  private auth = new AuthMiddleware();
 
   constructor() {
     this.router = Router();
@@ -34,6 +36,7 @@ export class LeagueRoutes {
   initRoutes() {
     this.router.post(
       '/',
+      this.auth.protect,
       this.leagueController.add.bind(this.leagueController)
     );
     this.router.get(
@@ -50,6 +53,7 @@ export class LeagueRoutes {
     );
     this.router.delete(
       '/:id',
+      this.auth.protect,
       this.leagueController.delete.bind(this.leagueController)
     );
   }

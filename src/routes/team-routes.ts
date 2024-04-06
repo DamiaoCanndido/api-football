@@ -53,10 +53,12 @@ export class TeamRoutes {
     );
     this.router.put(
       '/:id',
+      this.auth.protect,
       this.teamController.update.bind(this.teamController)
     );
     this.router.delete(
       '/:id',
+      this.auth.protect,
       this.teamController.delete.bind(this.teamController)
     );
   }
