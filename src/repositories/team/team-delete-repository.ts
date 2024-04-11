@@ -4,7 +4,7 @@ import { TeamDeleteInterface } from '../../interfaces/team';
 import { HttpException } from '../../errors';
 
 export class TeamDeleteRepository implements TeamDeleteInterface {
-  async delete(id: string): Promise<TeamOutput> {
+  async delete(id: number): Promise<TeamOutput> {
     try {
       const team = await prisma.team.findUnique({
         where: {

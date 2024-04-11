@@ -14,8 +14,8 @@ Essa api foi criada como fonte de estudo e também para ser usada como portfóli
 | search  | GET | /league | name
 | findone | GET | /league/:id |
 | findbycountry | GET | /league/:countryId/country |
-| add | POST | /fixtures |
-| findbyleague | GET | /fixtures/:leagueId/league | round
-| findbyteam | GET | /fixtures/:teamId/team |
-| updatescore | PUT | /fixtures/:id |
+| add | POST | /match |
+| findbyleague | GET | /match/:leagueId/league | round
+| findbyteam | GET | /match/:teamId/team |
+| updatescore | PUT | /match/:id |
 

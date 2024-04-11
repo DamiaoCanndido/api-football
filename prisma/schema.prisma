@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -14,13 +14,13 @@ enum TeamType {
 }
 
 model Team {
-  id     String     @id @default(auto()) @map("_id") @db.ObjectId
+  id     Int      @id @default(autoincrement())
   name   String
   code   String
   type   TeamType
   logo   String
-  home   Fixtures[] @relation("home")
-  away   Fixtures[] @relation("away")
+  home   Match[]  @relation("home")
+  away   Match[]  @relation("away")
   League League[]
 }
 
@@ -30,7 +30,7 @@ enum LeagueType {
 }
 
 model League {
-  id             String     @id @default(auto()) @map("_id") @db.ObjectId
+  id             Int        @id @default(autoincrement())
   name           String
   type           LeagueType
   logo           String
@@ -38,26 +38,24 @@ model League {
   rounds         String[]   @default([])
   numberOfRounds Int
   finished       Boolean    @default(false)
-  countryId      String?    @db.ObjectId
+  countryId      Int?
   country        Team?      @relation(fields: [countryId], references: [id])
-  Fixtures       Fixtures[]
+  Match          Match[]
 }
 
-model Fixtures {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+model Match {
+  id          Int      @id @default(autoincrement())
   fullTime    Boolean  @default(false)
   startDate   DateTime
   round       String?
-  leagueId    String?  @db.ObjectId
+  leagueId    Int
   league      League?  @relation(fields: [leagueId], references: [id])
-  homeId      String   @unique @db.ObjectId
+  homeId      Int
   home        Team     @relation("home", fields: [homeId], references: [id])
-  awayId      String   @unique @db.ObjectId
+  awayId      Int
   away        Team     @relation("away", fields: [awayId], references: [id])
   homeScore   Int?
   awayScore   Int?
   homePenalty Int?
   awayPenalty Int?
 }
-
-

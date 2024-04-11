@@ -6,7 +6,7 @@ import { HttpException } from '../../errors';
 export class LeagueFindbyCountryRepository
   implements LeagueFindbyCountryInterface
 {
-  async findByCountry(countryId: string): Promise<LeagueOutput[]> {
+  async findByCountry(countryId: number): Promise<LeagueOutput[]> {
     try {
       const country = await prisma.team.findUnique({
         where: {

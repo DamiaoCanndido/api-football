@@ -4,7 +4,7 @@ import { LeagueDeleteInterface } from '../../interfaces/league';
 import { HttpException } from '../../errors';
 
 export class LeagueDeleteRepository implements LeagueDeleteInterface {
-  async delete(id: string): Promise<LeagueOutput> {
+  async delete(id: number): Promise<LeagueOutput> {
     try {
       const league = await prisma.league.findUnique({
         where: {

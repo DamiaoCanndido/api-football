@@ -1,5 +1,5 @@
 import { LeagueOutput } from '../../entities';
 
 export interface LeagueDeleteInterface {
-  delete: (id: string) => Promise<LeagueOutput>;
+  delete: (id: number) => Promise<LeagueOutput>;
 }

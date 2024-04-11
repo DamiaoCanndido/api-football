@@ -4,7 +4,7 @@ import { Server as SocketIO } from 'socket.io';
 
 const app = express();
 const server = createServer(app);
-const io = new SocketIO(server);
+const io = new SocketIO(server, { cors: { origin: '*' } });
 
 export function initializeSocket() {
   io.on('connection', (socket) => {

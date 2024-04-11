@@ -1,5 +1,5 @@
 import { LeagueOutput } from '../../entities';
 
 export interface LeagueFindoneInterface {
-  findOne: (id: string) => Promise<LeagueOutput>;
+  findOne: (id: number) => Promise<LeagueOutput>;
 }

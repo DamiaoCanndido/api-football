@@ -36,22 +36,22 @@ export class TeamUseCase
     return results;
   }
 
-  async findOne(id: string) {
+  async findOne(id: number) {
     const results = await this.findoneRepo.findOne(id);
     return results;
   }
 
-  async findByLeague(leagueId: string) {
+  async findByLeague(leagueId: number) {
     const result = await this.findbyLeagueRepo.findByLeague(leagueId);
     return result;
   }
 
-  async update(id: string, team: TeamUpdate) {
+  async update(id: number, team: TeamUpdate) {
     const result = await this.updateRepo.update(id, team);
     return result;
   }
 
-  async delete(id: string) {
+  async delete(id: number) {
     const results = await this.deleteRepo.delete(id);
     return results;
   }

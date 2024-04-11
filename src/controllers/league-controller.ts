@@ -32,7 +32,7 @@ export class LeagueController {
   async findOne(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-      const league = await this.leagueUseCase.findOne(id);
+      const league = await this.leagueUseCase.findOne(Number(id));
       return res.status(200).json(league);
     } catch (error) {
       next(error);
@@ -42,7 +42,7 @@ export class LeagueController {
   async findbyCountry(req: Request, res: Response, next: NextFunction) {
     const { countryId }: LeagueQueries = req.params;
     try {
-      const leagues = await this.leagueUseCase.findByCountry(countryId);
+      const leagues = await this.leagueUseCase.findByCountry(Number(countryId));
       return res.status(200).json(leagues);
     } catch (error) {
       next(error);
@@ -52,7 +52,7 @@ export class LeagueController {
   async delete(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-      const league = await this.leagueUseCase.delete(id);
+      const league = await this.leagueUseCase.delete(Number(id));
       return res.status(200).json(league);
     } catch (error) {
       next(error);

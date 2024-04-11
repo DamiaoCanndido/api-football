@@ -1,17 +1,17 @@
 import { prisma } from '../../infra';
 import { dateNow } from '../../helpers';
-import { FixturesInput, FixturesOutput, LeagueOutput } from '../../entities';
-import { FixturesAddInterface } from '../../interfaces/fixtures';
+import { MatchInput, MatchOutput, LeagueOutput } from '../../entities';
+import { MatchAddInterface } from '../../interfaces/match';
 import { HttpException } from '../../errors';
 
-export class FixturesAddRepository implements FixturesAddInterface {
-  async add(fxParam: FixturesInput): Promise<FixturesOutput> {
+export class MatchAddRepository implements MatchAddInterface {
+  async add(mtParam: MatchInput): Promise<MatchOutput> {
     let leagueExists: LeagueOutput | null;
     try {
       const teamsExists = await prisma.team.findMany({
         where: {
           id: {
-            in: [fxParam.homeId, fxParam.awayId],
+            in: [mtParam.homeId, mtParam.awayId],
           },
         },
       });
@@ -20,10 +20,10 @@ export class FixturesAddRepository implements FixturesAddInterface {
         throw new HttpException(400, 'Some team is missing.');
       }
 
-      if (fxParam.leagueId) {
+      if (mtParam.leagueId) {
         leagueExists = await prisma.league.findUnique({
           where: {
-            id: fxParam.leagueId,
+            id: mtParam.leagueId,
           },
         });
         if (!leagueExists) {
@@ -31,18 +31,18 @@ export class FixturesAddRepository implements FixturesAddInterface {
         }
       }
 
-      if (new Date(fxParam.startDate).getTime() < dateNow) {
+      if (new Date(mtParam.startDate).getTime() < dateNow) {
         throw new HttpException(400, 'start date not valid.');
       }
 
-      const fixtures = await prisma.fixtures.create({
+      const match = await prisma.match.create({
         data: {
-          startDate: new Date(fxParam.startDate),
-          homeId: fxParam.homeId,
-          awayId: fxParam.awayId,
-          leagueId: fxParam.leagueId,
+          startDate: new Date(mtParam.startDate),
+          homeId: mtParam.homeId,
+          awayId: mtParam.awayId,
+          leagueId: mtParam.leagueId!,
           round: leagueExists!
-            ? leagueExists!.rounds[fxParam.round! - 1]
+            ? leagueExists!.rounds[mtParam.round! - 1]
             : null,
         },
         include: {
@@ -55,7 +55,7 @@ export class FixturesAddRepository implements FixturesAddInterface {
           },
         },
       });
-      return fixtures;
+      return match;
     } catch (error) {
       if (error instanceof HttpException) {
         throw new HttpException(error.status, error.message);

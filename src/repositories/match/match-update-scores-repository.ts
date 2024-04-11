@@ -1,24 +1,22 @@
 import { prisma } from '../../infra';
-import { FixturesScores, FixturesOutput } from '../../entities';
-import { FixturesUpdateScoresInterface } from '../../interfaces/fixtures';
+import { MatchScores, MatchOutput } from '../../entities';
+import { MatchUpdateScoresInterface } from '../../interfaces/match';
 import { HttpException } from '../../errors';
 
-export class FixturesUpdateScoresRepository
-  implements FixturesUpdateScoresInterface
-{
+export class MatchUpdateScoresRepository implements MatchUpdateScoresInterface {
   async updateScores({
     id,
     homeScore,
     awayScore,
     homePenalty,
     awayPenalty,
-  }: FixturesScores): Promise<FixturesOutput> {
+  }: MatchScores): Promise<MatchOutput> {
     try {
-      const fixtures = await prisma.fixtures.findUnique({ where: { id } });
-      if (!fixtures) {
-        throw new HttpException(404, 'Fixtures id not found.');
+      const match = await prisma.match.findUnique({ where: { id } });
+      if (!match) {
+        throw new HttpException(404, 'Match id not found.');
       }
-      const fixturesCreated = await prisma.fixtures.update({
+      const fixturesCreated = await prisma.match.update({
         where: {
           id,
         },

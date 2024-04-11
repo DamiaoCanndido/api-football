@@ -1,14 +1,12 @@
 import { prisma } from '../../infra';
-import { FixturesGroupByDatesInterface } from '../../interfaces/fixtures';
-import { FixturesOutput } from '../../entities';
+import { MatchGroupByDatesInterface } from '../../interfaces/match';
+import { MatchOutput } from '../../entities';
 import { HttpException } from '../../errors';
 
-export class FixturesGroupByDatesRepository
-  implements FixturesGroupByDatesInterface
-{
-  async groupByDates(): Promise<FixturesOutput[]> {
+export class MatchGroupByDatesRepository implements MatchGroupByDatesInterface {
+  async groupByDates(): Promise<MatchOutput[]> {
     try {
-      const fixtures = await prisma.fixtures.findMany({
+      const match = await prisma.match.findMany({
         orderBy: [{ fullTime: 'asc' }, { startDate: 'asc' }],
         include: {
           home: true,
@@ -20,7 +18,7 @@ export class FixturesGroupByDatesRepository
           },
         },
       });
-      return fixtures;
+      return match;
     } catch (error) {
       if (error instanceof HttpException) {
         throw new HttpException(error.status, error.message);

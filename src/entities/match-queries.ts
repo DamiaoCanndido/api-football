@@ -1,22 +1,22 @@
 import { HttpException } from '../errors';
 
-export class FixturesQueries {
+export class MatchQueries {
   constructor(
-    public leagueId?: string,
-    public teamId?: string,
+    public leagueId?: number,
+    public teamId?: number,
     public round?: string
   ) {}
 }
 
-export class FixturesScores {
+export class MatchScores {
   constructor(
-    public id?: string,
+    public id?: number,
     public homeScore?: number,
     public awayScore?: number,
     public homePenalty?: number | null,
     public awayPenalty?: number | null
   ) {
-    if (!this.id || this.id === '') {
+    if (!this.id || this.id === 0) {
       throw new HttpException(400, 'id not valid.');
     }
     if (typeof this.homeScore === 'undefined' || this.homeScore! < 0) {

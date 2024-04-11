@@ -1,40 +1,40 @@
 import { HttpException } from '../errors';
-import { Team, TeamOutput } from './team';
+import { TeamOutput } from './team';
 
 type League = {
   name: string;
 };
 
-export interface FixturesInput {
+export interface MatchInput {
   startDate: string;
-  homeId: string;
-  awayId: string;
-  leagueId?: string | null;
+  homeId: number;
+  awayId: number;
+  leagueId?: number | null;
   round?: number | null;
 }
 
-export interface FixturesOutput {
-  id: string;
+export interface MatchOutput {
+  id: number;
   startDate: Date;
   home: TeamOutput;
   away: TeamOutput;
-  leagueId: string | null;
+  leagueId: number | null;
   round: string | null;
   league: League | null;
 }
 
-export class Fixtures {
-  constructor(private readonly input: FixturesInput) {
+export class Match {
+  constructor(private readonly input: MatchInput) {
     if (!this.input.startDate || this.input.startDate === '') {
       throw new HttpException(400, 'Start date is incorrect.');
     }
-    if (!this.input.homeId || this.input.homeId === '') {
+    if (!this.input.homeId || this.input.homeId === 0) {
       throw new HttpException(400, 'Home team is incorrect.');
     }
-    if (!this.input.homeId || this.input.homeId === '') {
+    if (!this.input.homeId || this.input.homeId === 0) {
       throw new HttpException(400, 'Home team is incorrect.');
     }
-    if (!this.input.awayId || this.input.awayId === '') {
+    if (!this.input.awayId || this.input.awayId === 0) {
       throw new HttpException(400, 'Away team is incorrect.');
     }
     if (this.input.leagueId === undefined) {

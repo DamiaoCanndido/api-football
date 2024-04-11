@@ -4,7 +4,10 @@ import { TeamUpdateInterface } from '../../interfaces/team';
 import { HttpException } from '../../errors';
 
 export class TeamUpdateRepository implements TeamUpdateInterface {
-  async update(id: string, {name, code, logo, type}: TeamUpdate): Promise<TeamOutput> {
+  async update(
+    id: number,
+    { name, code, logo, type }: TeamUpdate
+  ): Promise<TeamOutput> {
     try {
       const team = await prisma.team.findUnique({
         where: {
@@ -14,7 +17,10 @@ export class TeamUpdateRepository implements TeamUpdateInterface {
       if (!team) {
         throw new HttpException(404, 'Id invalid.');
       }
-      const teamUpdated = await prisma.team.update({ where: {id}, data: { name, code, logo, type } })
+      const teamUpdated = await prisma.team.update({
+        where: { id },
+        data: { name, code, logo, type },
+      });
       return teamUpdated;
     } catch (error) {
       if (error instanceof HttpException) {

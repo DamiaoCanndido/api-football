@@ -1,3 +1,3 @@
 export class LeagueQueries {
-  constructor(public name?: string, public countryId?: string) {}
+  constructor(public name?: string, public countryId?: number) {}
 }

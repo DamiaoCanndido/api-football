@@ -4,7 +4,7 @@ import { LeagueFindoneInterface } from '../../interfaces/league';
 import { HttpException } from '../../errors';
 
 export class LeagueFindoneRepository implements LeagueFindoneInterface {
-  async findOne(id: string): Promise<LeagueOutput> {
+  async findOne(id: number): Promise<LeagueOutput> {
     try {
       const league = await prisma.league.findUnique({
         where: {

@@ -36,7 +36,7 @@ export class TeamController {
   async findOne(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-      const team = await this.teamUseCase.findOne(id);
+      const team = await this.teamUseCase.findOne(Number(id));
       return res.status(200).json(team);
     } catch (error) {
       next(error);
@@ -47,7 +47,7 @@ export class TeamController {
   async findByLeague(req: Request, res: Response, next: NextFunction) {
     const { leagueId } = req.params;
     try {
-      const teams = await this.teamUseCase.findByLeague(leagueId);
+      const teams = await this.teamUseCase.findByLeague(Number(leagueId));
       return res.status(200).json(teams);
     } catch (error) {
       next(error);
@@ -59,7 +59,7 @@ export class TeamController {
     const { id } = req.params;
     const params: TeamUpdate = req.body;
     try {
-      const teams = await this.teamUseCase.update(id, params);
+      const teams = await this.teamUseCase.update(Number(id), params);
       return res.status(200).json(teams);
     } catch (error) {
       next(error);
@@ -70,7 +70,7 @@ export class TeamController {
   async delete(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
     try {
-      const teams = await this.teamUseCase.delete(id);
+      const teams = await this.teamUseCase.delete(Number(id));
       return res.status(200).json(teams);
     } catch (error) {
       next(error);

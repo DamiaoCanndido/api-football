@@ -1,22 +1,20 @@
 import { prisma } from '../../infra';
-import { FixturesOutput } from '../../entities';
-import { FixturesRescheduledInterface } from '../../interfaces/fixtures';
+import { MatchOutput } from '../../entities';
+import { MatchRescheduledInterface } from '../../interfaces/match';
 import { HttpException } from '../../errors';
 import { dateNow } from 'helpers';
 
-export class FixturesRescheduledRepository
-  implements FixturesRescheduledInterface
-{
-  async reschedule(id: string, startDate: string): Promise<FixturesOutput> {
+export class MatchRescheduledRepository implements MatchRescheduledInterface {
+  async reschedule(id: number, startDate: string): Promise<MatchOutput> {
     try {
-      const fixtures = await prisma.fixtures.findUnique({ where: { id } });
-      if (!fixtures) {
-        throw new HttpException(404, 'Fixtures id not found.');
+      const match = await prisma.match.findUnique({ where: { id } });
+      if (!match) {
+        throw new HttpException(404, 'Match id not found.');
       }
       if (new Date(startDate).getTime() < dateNow) {
         throw new HttpException(400, 'start date not valid.');
       }
-      const fixturesRescheduled = await prisma.fixtures.update({
+      const fixturesRescheduled = await prisma.match.update({
         where: {
           id,
         },

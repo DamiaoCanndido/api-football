@@ -3,14 +3,14 @@ import { app, server, initializeSocket } from '../ws';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
 import { errorMiddleware } from '../middlewares';
-import { TeamRoutes, LeagueRoutes, FixturesRoutes } from '../routes';
+import { TeamRoutes, LeagueRoutes, MatchRoutes } from '../routes';
 
 dotenv.config();
 
 export class App {
   private teamRoutes = new TeamRoutes();
   private leagueRoutes = new LeagueRoutes();
-  private fixturesRoutes = new FixturesRoutes();
+  private matchRoutes = new MatchRoutes();
 
   constructor() {
     this.middlewaresInitialize();
@@ -22,7 +22,7 @@ export class App {
   routesInitialize() {
     app.use('/team', this.teamRoutes.router);
     app.use('/league', this.leagueRoutes.router);
-    app.use('/fixtures', this.fixturesRoutes.router);
+    app.use('/match', this.matchRoutes.router);
   }
 
   errorInterception() {

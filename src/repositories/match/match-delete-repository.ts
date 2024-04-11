@@ -1,20 +1,20 @@
 import { prisma } from '../../infra';
-import { FixturesOutput } from '../../entities';
-import { FixturesDeleteInterface } from '../../interfaces/fixtures';
+import { MatchOutput } from '../../entities';
+import { MatchDeleteInterface } from '../../interfaces/match';
 import { HttpException } from '../../errors';
 
-export class FixturesDeleteRepository implements FixturesDeleteInterface {
-  async delete(id: string): Promise<FixturesOutput> {
+export class MatchDeleteRepository implements MatchDeleteInterface {
+  async delete(id: number): Promise<MatchOutput> {
     try {
-      const fixtures = await prisma.fixtures.findUnique({
+      const match = await prisma.match.findUnique({
         where: { id },
         include: { home: true, away: true, league: true },
       });
-      if (!fixtures) {
+      if (!match) {
         throw new HttpException(400, 'Id invalid.');
       }
-      await prisma.fixtures.delete({ where: { id } });
-      return fixtures;
+      await prisma.match.delete({ where: { id } });
+      return match;
     } catch (error) {
       if (error instanceof HttpException) {
         throw new HttpException(error.status, error.message);

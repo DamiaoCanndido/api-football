@@ -9,18 +9,18 @@ export interface LeagueInput {
   season: string;
   numberOfRounds: number;
   rounds?: string[];
-  countryId?: string | null;
+  countryId?: number | null;
 }
 
 export interface LeagueOutput {
-  id: string;
+  id: number;
   name: string;
   type: leagueType;
   logo: string;
   season: string;
   numberOfRounds: number;
   rounds: string[];
-  countryId: string | null;
+  countryId: number | null;
 }
 
 export class League {

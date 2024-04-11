@@ -33,17 +33,17 @@ export class LeagueUseCase
     return result;
   }
 
-  async findOne(id: string) {
+  async findOne(id: number) {
     const result = await this.findoneRepo.findOne(id);
     return result;
   }
 
-  async findByCountry(countryId: string) {
+  async findByCountry(countryId: number) {
     const result = await this.findbyCountryRepo.findByCountry(countryId);
     return result;
   }
 
-  async delete(id: string) {
+  async delete(id: number) {
     const result = await this.deleteRepo.delete(id);
     return result;
   }

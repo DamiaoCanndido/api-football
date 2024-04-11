@@ -1,15 +1,10 @@
 import { prisma } from '../../infra';
-import { FixturesFindByTeamInterface } from '../../interfaces/fixtures';
-import { FixturesQueries, FixturesOutput } from '../../entities';
+import { MatchFindByTeamInterface } from '../../interfaces/match';
+import { MatchQueries, MatchOutput } from '../../entities';
 import { HttpException } from '../../errors';
 
-export class FixturesFindByTeamRepository
-  implements FixturesFindByTeamInterface
-{
-  async findByTeam({
-    teamId,
-    leagueId,
-  }: FixturesQueries): Promise<FixturesOutput[]> {
+export class MatchFindByTeamRepository implements MatchFindByTeamInterface {
+  async findByTeam({ teamId, leagueId }: MatchQueries): Promise<MatchOutput[]> {
     try {
       const team = await prisma.team.findUnique({
         where: {
@@ -29,7 +24,7 @@ export class FixturesFindByTeamRepository
           throw new HttpException(404, 'league id not valid.');
         }
       }
-      const fixtures = await prisma.fixtures.findMany({
+      const match = await prisma.match.findMany({
         where: {
           OR: [{ homeId: teamId }, { awayId: teamId }],
           leagueId,
@@ -46,7 +41,7 @@ export class FixturesFindByTeamRepository
         orderBy: [{ fullTime: 'asc' }, { startDate: 'asc' }],
       });
 
-      return fixtures;
+      return match;
     } catch (error) {
       if (error instanceof HttpException) {
         throw new HttpException(error.status, error.message);
