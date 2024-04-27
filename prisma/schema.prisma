@@ -14,14 +14,15 @@ enum TeamType {
 }
 
 model Team {
-  id     Int      @id @default(autoincrement())
-  name   String
-  code   String
-  type   TeamType
-  logo   String
-  home   Match[]  @relation("home")
-  away   Match[]  @relation("away")
-  League League[]
+  id      Int      @id @default(autoincrement())
+  name    String
+  code    String
+  country String?
+  type    TeamType
+  logo    String
+  home    Match[]  @relation("home")
+  away    Match[]  @relation("away")
+  League  League[]
 }
 
 enum LeagueType {

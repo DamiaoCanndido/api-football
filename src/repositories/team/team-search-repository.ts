@@ -3,18 +3,18 @@ import { TeamOutput, TeamQueries } from '../../entities';
 import { TeamSearchInterface } from '../../interfaces/team';
 
 export class TeamSearchRepository implements TeamSearchInterface {
-  async search({ code, name, type }: TeamQueries): Promise<TeamOutput[]> {
+  async search({ name, type, country }: TeamQueries): Promise<TeamOutput[]> {
     const teams = await prisma.team.findMany({
       where: {
         name: {
           contains: name,
           mode: 'insensitive',
         },
-        code: {
-          contains: code,
+        type,
+        country: {
+          contains: country,
           mode: 'insensitive',
         },
-        type,
       },
       orderBy: {
         name: 'asc',

@@ -17,14 +17,14 @@ export class TeamController {
     }
   }
 
-  // GET: /team?name=&code=%type=
+  // GET: /team?name=&country=%type=
   async search(req: Request, res: Response, next: NextFunction) {
-    const { name, code, type }: TeamQueries = req.query;
+    const { name, type, country }: TeamQueries = req.query;
     try {
       const teams = await this.teamUseCase.search({
         name,
-        code,
         type,
+        country,
       });
       return res.status(200).json(teams);
     } catch (error) {

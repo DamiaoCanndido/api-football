@@ -12,7 +12,7 @@ describe('League entity', () => {
       season: '2023/2023',
       numberOfRounds: 3,
       rounds: ['1', '2', '3'],
-      countryId: '1',
+      countryId: 1,
     };
     sut = new League(data);
   });
