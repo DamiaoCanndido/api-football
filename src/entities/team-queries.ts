@@ -4,6 +4,7 @@ export class TeamQueries {
   constructor(
     public name?: string,
     public type?: TeamType,
-    public country?: string
+    public country?: string,
+    public p?: number
   ) {}
 }

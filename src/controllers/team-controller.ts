@@ -19,12 +19,13 @@ export class TeamController {
 
   // GET: /team?name=&country=%type=
   async search(req: Request, res: Response, next: NextFunction) {
-    const { name, type, country }: TeamQueries = req.query;
+    const { name, type, country, p }: TeamQueries = req.query;
     try {
       const teams = await this.teamUseCase.search({
         name,
         type,
         country,
+        p,
       });
       return res.status(200).json(teams);
     } catch (error) {
