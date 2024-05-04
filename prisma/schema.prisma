@@ -22,7 +22,6 @@ model Team {
   logo    String
   home    Match[]  @relation("home")
   away    Match[]  @relation("away")
-  League  League[]
 }
 
 enum LeagueType {
@@ -39,8 +38,7 @@ model League {
   rounds         String[]   @default([])
   numberOfRounds Int
   finished       Boolean    @default(false)
-  countryId      Int?
-  country        Team?      @relation(fields: [countryId], references: [id])
+  country        String?
   Match          Match[]
 }
 
