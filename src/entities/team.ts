@@ -5,6 +5,7 @@ export type TeamType = 'club' | 'selection' | 'amateur';
 export interface TeamInput {
   name: string;
   code: string;
+  country?: string;
   type: TeamType;
   logo: string;
 }
@@ -13,6 +14,7 @@ export interface TeamOutput {
   id: number;
   name: string;
   code: string;
+  country: string | null;
   type: TeamType;
   logo: string;
 }
@@ -20,6 +22,7 @@ export interface TeamOutput {
 export interface TeamUpdate {
   name?: string;
   code?: string;
+  country?: string;
   type?: TeamType;
   logo?: string;
 }
@@ -31,6 +34,9 @@ export class Team {
     }
     if (!this.input.code || this.input.code.length !== 3) {
       throw new HttpException(400, 'Code is incorrect.');
+    }
+    if (this.input.country && this.input.code.length < 3) {
+      throw new HttpException(400, 'Country is incorrect.');
     }
     if (
       this.input.type === 'club' ||
