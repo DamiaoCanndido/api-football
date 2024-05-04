@@ -1,4 +1,6 @@
 import express from 'express';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocs from '../docs/swagger.json';
 import { app, server, initializeSocket } from '../ws';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
@@ -23,6 +25,7 @@ export class App {
     app.use('/team', this.teamRoutes.router);
     app.use('/league', this.leagueRoutes.router);
     app.use('/match', this.matchRoutes.router);
+    app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
   }
 
   errorInterception() {
