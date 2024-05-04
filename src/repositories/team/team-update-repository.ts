@@ -6,7 +6,7 @@ import { HttpException } from '../../errors';
 export class TeamUpdateRepository implements TeamUpdateInterface {
   async update(
     id: number,
-    { name, code, logo, type }: TeamUpdate
+    { name, code, logo, type, country }: TeamUpdate
   ): Promise<TeamOutput> {
     try {
       const team = await prisma.team.findUnique({
@@ -19,7 +19,7 @@ export class TeamUpdateRepository implements TeamUpdateInterface {
       }
       const teamUpdated = await prisma.team.update({
         where: { id },
-        data: { name, code, logo, type },
+        data: { name, code, logo, type, country },
       });
       return teamUpdated;
     } catch (error) {
