@@ -1,1 +1,260 @@
-{}
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Api de futebol",
+    "description": "API para marcação de resultados dos jogos de futebol",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3333",
+      "description": "Api de desenvolvimento"
+    }
+  ],
+  "paths": {
+    "/team": {
+      "post": {
+        "summary": "Criação de time",
+        "tags": ["Team"],
+        "security": [{ "apiKeyAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Team"
+              },
+              "examples": {
+                "club": {
+                  "value": {
+                    "name": "Internacional",
+                    "code": "INT",
+                    "type": "club",
+                    "logo": "https://seeklogo.com/images/S/sc-internacional-rs-y100-logo-9C78954B54-seeklogo.com.png",
+                    "country": "Brasil"
+                  }
+                },
+                "selection": {
+                  "value": {
+                    "name": "Brasil",
+                    "code": "BRA",
+                    "type": "selection",
+                    "logo": "https://seeklogo.com/images/B/bandeira-do-brasil-logo-5D75AAD6AF-seeklogo.com.png"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unathorized"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Team"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Buscar todos os times",
+        "tags": ["Team"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Nome do time",
+            "required": false
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "description": "Nome do País",
+            "required": false
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Tipo do time (club, selection, amateur)",
+            "required": false
+          },
+          {
+            "name": "p",
+            "in": "query",
+            "description": "Número da página",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Team"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/{id}": {
+      "get": {
+        "summary": "Buscar time pelo id",
+        "tags": ["Team"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do time",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Team"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Editar time pelo id",
+        "tags": ["Team"],
+        "security": [{ "apiKeyAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Team"
+              },
+              "examples": {
+                "club": {
+                  "value": {
+                    "name": "Internacional",
+                    "code": "INT",
+                    "type": "club",
+                    "logo": "https://seeklogo.com/images/S/sc-internacional-rs-y100-logo-9C78954B54-seeklogo.com.png",
+                    "country": "Brasil"
+                  }
+                },
+                "selection": {
+                  "value": {
+                    "name": "Brasil",
+                    "code": "BRA",
+                    "type": "selection",
+                    "logo": "https://seeklogo.com/images/B/bandeira-do-brasil-logo-5D75AAD6AF-seeklogo.com.png"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do time",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unathorized"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Team"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletar time pelo id",
+        "tags": ["Team"],
+        "security": [{ "apiKeyAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do time",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Team"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Team": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "name": "founder",
+        "in": "header"
+      }
+    }
+  }
+}
