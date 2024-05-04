@@ -38,8 +38,8 @@ export class LeagueUseCase
     return result;
   }
 
-  async findByCountry(countryId: number) {
-    const result = await this.findbyCountryRepo.findByCountry(countryId);
+  async findByCountry(country: string) {
+    const result = await this.findbyCountryRepo.findByCountry(country);
     return result;
   }
 

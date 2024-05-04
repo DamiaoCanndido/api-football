@@ -40,9 +40,9 @@ export class LeagueController {
   }
 
   async findbyCountry(req: Request, res: Response, next: NextFunction) {
-    const { countryId }: LeagueQueries = req.params;
+    const { country }: LeagueQueries = req.params;
     try {
-      const leagues = await this.leagueUseCase.findByCountry(Number(countryId));
+      const leagues = await this.leagueUseCase.findByCountry(country);
       return res.status(200).json(leagues);
     } catch (error) {
       next(error);

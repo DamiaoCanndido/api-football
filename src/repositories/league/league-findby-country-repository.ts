@@ -6,26 +6,11 @@ import { HttpException } from '../../errors';
 export class LeagueFindbyCountryRepository
   implements LeagueFindbyCountryInterface
 {
-  async findByCountry(countryId: number): Promise<LeagueOutput[]> {
+  async findByCountry(country: string): Promise<LeagueOutput[]> {
     try {
-      const country = await prisma.team.findUnique({
-        where: {
-          id: countryId,
-        },
-      });
-      if (!country) {
-        throw new HttpException(400, 'Country id invalid.');
-      }
-      if (country.type !== 'selection') {
-        throw new HttpException(400, 'This is not a country.');
-      }
       const leagues = await prisma.league.findMany({
         where: {
-          country: {
-            id: {
-              equals: countryId,
-            },
-          },
+          country,
           finished: false,
         },
       });

@@ -9,7 +9,7 @@ export interface LeagueInput {
   season: string;
   numberOfRounds: number;
   rounds?: string[];
-  countryId?: number | null;
+  country?: string;
 }
 
 export interface LeagueOutput {
@@ -20,7 +20,7 @@ export interface LeagueOutput {
   season: string;
   numberOfRounds: number;
   rounds: string[];
-  countryId: number | null;
+  country: string | null;
 }
 
 export class League {
@@ -41,8 +41,8 @@ export class League {
     if (!this.input.numberOfRounds || this.input.numberOfRounds <= 0) {
       throw new HttpException(400, 'number of rounds is incorrect.');
     }
-    if (this.input.countryId === undefined) {
-      this.input.countryId = null;
+    if (this.input.country && this.input.country.length < 3) {
+      throw new HttpException(400, 'Country is incorrect.');
     }
     this.input.rounds = Array.from(
       { length: this.input.numberOfRounds },
