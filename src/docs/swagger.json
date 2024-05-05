@@ -109,6 +109,41 @@
         }
       }
     },
+    "/team/{leagueId}/league": {
+      "get": {
+        "summary": "Buscar times pelo id da liga",
+        "tags": ["Team"],
+        "parameters": [
+          {
+            "name": "leagueId",
+            "in": "path",
+            "description": "Id da liga",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Team"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/team/{id}": {
       "get": {
         "summary": "Buscar time pelo id",
@@ -122,6 +157,12 @@
           }
         ],
         "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "400": {
+            "description": "Bad request"
+          },
           "200": {
             "description": "OK",
             "content": {
@@ -176,6 +217,9 @@
           }
         ],
         "responses": {
+          "404": {
+            "description": "Not found"
+          },
           "401": {
             "description": "Unathorized"
           },
@@ -208,6 +252,15 @@
           }
         ],
         "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "401": {
+            "description": "Unathorized"
+          },
+          "400": {
+            "description": "Bad request"
+          },
           "200": {
             "description": "OK",
             "content": {
