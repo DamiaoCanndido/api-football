@@ -1,6 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 import { TeamUseCase } from '../use-cases';
-import { Team, TeamInput, TeamQueries, TeamUpdate } from '../entities';
+import {
+  TeamCreationValidation,
+  TeamUpdateValidation,
+  TeamInput,
+  TeamQueries,
+  TeamUpdate,
+} from '../entities';
 
 export class TeamController {
   constructor(private teamUseCase: TeamUseCase) {}
@@ -9,7 +15,7 @@ export class TeamController {
   async add(req: Request, res: Response, next: NextFunction) {
     const param: TeamInput = req.body;
     try {
-      new Team(param);
+      new TeamCreationValidation(param);
       const team = await this.teamUseCase.add(param);
       return res.status(201).json(team);
     } catch (error) {
@@ -60,6 +66,7 @@ export class TeamController {
     const { id } = req.params;
     const params: TeamUpdate = req.body;
     try {
+      new TeamUpdateValidation(params);
       const teams = await this.teamUseCase.update(Number(id), params);
       return res.status(200).json(teams);
     } catch (error) {
