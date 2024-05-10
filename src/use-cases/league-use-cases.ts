@@ -3,7 +3,6 @@ import {
   LeagueAddInterface,
   LeagueSearchInterface,
   LeagueFindoneInterface,
-  LeagueFindbyCountryInterface,
   LeagueDeleteInterface,
 } from '../interfaces/league';
 
@@ -12,14 +11,12 @@ export class LeagueUseCase
     LeagueAddInterface,
     LeagueSearchInterface,
     LeagueFindoneInterface,
-    LeagueFindbyCountryInterface,
     LeagueDeleteInterface
 {
   constructor(
     private addRepo: LeagueAddInterface,
     private searchRepo: LeagueSearchInterface,
     private findoneRepo: LeagueFindoneInterface,
-    private findbyCountryRepo: LeagueFindbyCountryInterface,
     private deleteRepo: LeagueDeleteInterface
   ) {}
 
@@ -35,11 +32,6 @@ export class LeagueUseCase
 
   async findOne(id: number) {
     const result = await this.findoneRepo.findOne(id);
-    return result;
-  }
-
-  async findByCountry(country: string) {
-    const result = await this.findbyCountryRepo.findByCountry(country);
     return result;
   }
 

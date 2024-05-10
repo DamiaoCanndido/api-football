@@ -18,10 +18,11 @@ export class LeagueController {
   }
 
   async search(req: Request, res: Response, next: NextFunction) {
-    const { name }: LeagueQueries = req.query;
+    const { name, country }: LeagueQueries = req.query;
     try {
       const leagues = await this.leagueUseCase.search({
         name,
+        country,
       });
       return res.status(200).json(leagues);
     } catch (error) {
@@ -34,16 +35,6 @@ export class LeagueController {
       const { id } = req.params;
       const league = await this.leagueUseCase.findOne(Number(id));
       return res.status(200).json(league);
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  async findbyCountry(req: Request, res: Response, next: NextFunction) {
-    const { country }: LeagueQueries = req.params;
-    try {
-      const leagues = await this.leagueUseCase.findByCountry(country);
-      return res.status(200).json(leagues);
     } catch (error) {
       next(error);
     }
