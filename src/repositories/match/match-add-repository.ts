@@ -43,7 +43,7 @@ export class MatchAddRepository implements MatchAddInterface {
           leagueId: mtParam.leagueId!,
           round: leagueExists!
             ? leagueExists!.rounds[mtParam.round! - 1]
-            : null,
+            : undefined,
         },
         include: {
           home: true,

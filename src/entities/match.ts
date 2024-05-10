@@ -9,8 +9,8 @@ export interface MatchInput {
   startDate: string;
   homeId: number;
   awayId: number;
-  leagueId?: number | null;
-  round?: number | null;
+  leagueId?: number;
+  round?: number;
 }
 
 export interface MatchOutput {
@@ -25,7 +25,7 @@ export interface MatchOutput {
 
 export class Match {
   constructor(private readonly input: MatchInput) {
-    if (!this.input.startDate || this.input.startDate === '') {
+    if (!this.input.startDate || this.input.startDate.length < 10) {
       throw new HttpException(400, 'Start date is incorrect.');
     }
     if (!this.input.homeId || this.input.homeId === 0) {
@@ -37,14 +37,8 @@ export class Match {
     if (!this.input.awayId || this.input.awayId === 0) {
       throw new HttpException(400, 'Away team is incorrect.');
     }
-    if (this.input.leagueId === undefined) {
-      this.input.leagueId = null;
-      this.input.round = null;
-    }
-    if (this.input.leagueId) {
-      if (!this.input.round || this.input.round <= 0) {
-        throw new HttpException(400, 'Rounds is incorrect.');
-      }
+    if (this.input.round && this.input.round <= 0) {
+      throw new HttpException(400, 'Rounds is incorrect.');
     }
   }
 }

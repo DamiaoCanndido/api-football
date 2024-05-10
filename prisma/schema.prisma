@@ -47,7 +47,7 @@ model Match {
   fullTime    Boolean  @default(false)
   startDate   DateTime
   round       String?
-  leagueId    Int
+  leagueId    Int?
   league      League?  @relation(fields: [leagueId], references: [id])
   homeId      Int
   home        Team     @relation("home", fields: [homeId], references: [id])

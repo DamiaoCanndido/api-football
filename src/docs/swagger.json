@@ -432,6 +432,62 @@
           }
         }
       }
+    },
+    "/match": {
+      "post": {
+        "summary": "Criação de jogos",
+        "tags": ["Match"],
+        "security": [{ "apiKeyAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Match"
+              },
+              "examples": {
+                "oficial": {
+                  "value": {
+                    "startDate": "2024-12-25T12:00:00.000Z",
+                    "homeId": 1,
+                    "awayId": 2,
+                    "leagueId": 1,
+                    "round": 1
+                  }
+                },
+                "friendly": {
+                  "value": {
+                    "startDate": "2024-12-25T12:00:00.000Z",
+                    "homeId": 1,
+                    "awayId": 2
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "401": {
+            "description": "Unathorized"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Team"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -490,6 +546,45 @@
           },
           "id": {
             "type": "number"
+          }
+        }
+      },
+      "Match": {
+        "type": "object",
+        "properties": {
+          "startDate": {
+            "type": "string"
+          },
+          "homeId": {
+            "type": "number"
+          },
+          "home": {
+            "type": "object",
+            "readOnly": true,
+            "$ref": "#/components/schemas/Team"
+          },
+          "awayId": {
+            "type": "number"
+          },
+          "away": {
+            "type": "object",
+            "readOnly": true,
+            "$ref": "#/components/schemas/Team"
+          },
+          "leagueId": {
+            "type": "number"
+          },
+          "league": {
+            "type": "object",
+            "readOnly": true,
+            "$ref": "#/components/schemas/League"
+          },
+          "round": {
+            "type": "number"
+          },
+          "id": {
+            "type": "number",
+            "writeOnly": true
           }
         }
       }
