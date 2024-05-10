@@ -274,6 +274,164 @@
           }
         }
       }
+    },
+    "/league": {
+      "post": {
+        "summary": "Criação de liga",
+        "tags": ["League"],
+        "security": [{ "apiKeyAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/League"
+              },
+              "examples": {
+                "cup": {
+                  "value": {
+                    "name": "Libertadores",
+                    "type": "cup",
+                    "logo": "https://seeklogo.com/images/C/conmebol-libertadores-logo-2F5E29A965-seeklogo.com.png",
+                    "season": "2024/2024",
+                    "numberOfRounds": 13
+                  }
+                },
+                "league": {
+                  "value": {
+                    "name": "Brasileirão Série A",
+                    "type": "league",
+                    "logo": "https://seeklogo.com/images/C/campeonato-brasileiro-serie-a-logo-F86C405B11-seeklogo.com.png",
+                    "season": "2024/2024",
+                    "numberOfRounds": 38,
+                    "country": "Brasil"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unathorized"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/League"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Buscar todos as ligas",
+        "tags": ["League"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Nome da liga",
+            "required": false
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "description": "Nome do país",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/League"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/league/{id}": {
+      "get": {
+        "summary": "Buscar liga pelo id",
+        "tags": ["League"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da liga",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "401": {
+            "description": "Unathorized"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/League"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletar liga pelo id",
+        "tags": ["League"],
+        "security": [{ "apiKeyAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da liga",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "401": {
+            "description": "Unathorized"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/League"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -291,9 +449,43 @@
             "type": "string"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": ["amateur", "club", "selection"]
           },
           "logo": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number"
+          }
+        }
+      },
+      "League": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["cup", "league"]
+          },
+          "logo": {
+            "type": "string"
+          },
+          "season": {
+            "type": "string"
+          },
+          "numberOfRounds": {
+            "type": "number"
+          },
+          "rounds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "country": {
             "type": "string"
           },
           "id": {
