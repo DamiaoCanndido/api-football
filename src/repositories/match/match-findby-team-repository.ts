@@ -27,7 +27,6 @@ export class MatchFindByTeamRepository implements MatchFindByTeamInterface {
       const match = await prisma.match.findMany({
         where: {
           OR: [{ homeId: teamId }, { awayId: teamId }],
-          leagueId,
         },
         include: {
           home: true,

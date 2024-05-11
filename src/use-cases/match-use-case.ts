@@ -29,23 +29,23 @@ export class MatchUseCase
     private rescheduledRepo: MatchRescheduledInterface
   ) {}
 
-  async add(fixture: MatchInput) {
-    const result = await this.addFxRepo.add(fixture);
+  async add(match: MatchInput) {
+    const result = await this.addFxRepo.add(match);
     return result;
   }
 
-  async findByLeague(fxQuery: MatchQueries) {
-    const result = await this.findByLeagueRepo.findByLeague(fxQuery);
+  async findByLeague(mtQuery: MatchQueries) {
+    const result = await this.findByLeagueRepo.findByLeague(mtQuery);
     return result;
   }
 
-  async findByTeam(fxQuery: MatchQueries) {
-    const result = await this.findByTeamRepo.findByTeam(fxQuery);
+  async findByTeam(mtQuery: MatchQueries) {
+    const result = await this.findByTeamRepo.findByTeam(mtQuery);
     return result;
   }
 
-  async updateScores(fxUpdateScores: MatchScores) {
-    const result = await this.updateScoresRepo.updateScores(fxUpdateScores);
+  async updateScores(mtUpdateScores: MatchScores) {
+    const result = await this.updateScoresRepo.updateScores(mtUpdateScores);
     return result;
   }
 

@@ -487,6 +487,196 @@
             }
           }
         }
+      },
+      "get": {
+        "summary": "Buscar jogos por data",
+        "tags": ["Match"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Match"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/match/{leagueId}/league": {
+      "get": {
+        "summary": "Buscar jogos pelo id da liga",
+        "tags": ["Match"],
+        "parameters": [
+          {
+            "name": "leagueId",
+            "in": "path",
+            "description": "Id da liga",
+            "required": true
+          },
+          {
+            "name": "round",
+            "in": "query",
+            "description": "Round",
+            "required": false
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Match"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/match/{teamId}/team": {
+      "get": {
+        "summary": "Buscar jogos pelo id do time",
+        "tags": ["Match"],
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "Id do time",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Match"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/match/{id}": {
+      "put": {
+        "summary": "Colocando placares",
+        "tags": ["Match"],
+        "security": [{ "apiKeyAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Match"
+              },
+              "examples": {
+                "normal": {
+                  "value": {
+                    "homeScore": 0,
+                    "awayScore": 0
+                  }
+                },
+                "penalty": {
+                  "value": {
+                    "homeScore": 0,
+                    "awayScore": 0,
+                    "homePenalty": 5,
+                    "awayPenalty": 4
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do jogo",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "401": {
+            "description": "Unathorized"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Match"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletar jogo pelo id",
+        "tags": ["Match"],
+        "security": [{ "apiKeyAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do jogo",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "401": {
+            "description": "Unathorized"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Match"
+                }
+              }
+            }
+          }
+        }
       }
     }
   },

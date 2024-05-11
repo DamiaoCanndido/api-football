@@ -10,7 +10,7 @@ export class MatchQueries {
 
 export class MatchScores {
   constructor(
-    public id?: number,
+    public id: number,
     public homeScore?: number,
     public awayScore?: number,
     public homePenalty?: number | null,
