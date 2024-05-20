@@ -433,6 +433,43 @@
         }
       }
     },
+    "/league/{id}/finish": {
+      "patch": {
+        "summary": "Finalizar liga",
+        "tags": ["League"],
+        "security": [{ "apiKeyAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da liga",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "401": {
+            "description": "Unathorized"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/League"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/match": {
       "post": {
         "summary": "Criação de jogos",

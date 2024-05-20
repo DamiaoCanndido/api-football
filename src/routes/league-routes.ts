@@ -4,6 +4,7 @@ import {
   LeagueSearchRepository,
   LeagueFindoneRepository,
   LeagueDeleteRepository,
+  LeagueFinishRepository,
 } from '../repositories/league';
 import { LeagueUseCase } from '../use-cases';
 import { LeagueController } from '../controllers';
@@ -20,11 +21,13 @@ export class LeagueRoutes {
     const leagueSearchRepository = new LeagueSearchRepository();
     const leagueFindoneRepository = new LeagueFindoneRepository();
     const leagueDeleteRepository = new LeagueDeleteRepository();
+    const leagueFinishRepository = new LeagueFinishRepository();
     const leagueUseCase = new LeagueUseCase(
       leagueAddRepository,
       leagueSearchRepository,
       leagueFindoneRepository,
-      leagueDeleteRepository
+      leagueDeleteRepository,
+      leagueFinishRepository
     );
     this.leagueController = new LeagueController(leagueUseCase);
     this.initRoutes();
@@ -48,6 +51,11 @@ export class LeagueRoutes {
       '/:id',
       this.auth.protect,
       this.leagueController.delete.bind(this.leagueController)
+    );
+    this.router.patch(
+      '/:id/finish',
+      this.auth.protect,
+      this.leagueController.finish.bind(this.leagueController)
     );
   }
 }

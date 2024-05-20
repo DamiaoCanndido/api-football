@@ -1,9 +1,10 @@
-import { LeagueInput, LeagueQueries } from '../entities';
+import { LeagueInput, LeagueOutput, LeagueQueries } from '../entities';
 import {
   LeagueAddInterface,
   LeagueSearchInterface,
   LeagueFindoneInterface,
   LeagueDeleteInterface,
+  LeagueFinishInterface,
 } from '../interfaces/league';
 
 export class LeagueUseCase
@@ -11,13 +12,15 @@ export class LeagueUseCase
     LeagueAddInterface,
     LeagueSearchInterface,
     LeagueFindoneInterface,
-    LeagueDeleteInterface
+    LeagueDeleteInterface,
+    LeagueFinishInterface
 {
   constructor(
     private addRepo: LeagueAddInterface,
     private searchRepo: LeagueSearchInterface,
     private findoneRepo: LeagueFindoneInterface,
-    private deleteRepo: LeagueDeleteInterface
+    private deleteRepo: LeagueDeleteInterface,
+    private finishRepo: LeagueFinishInterface
   ) {}
 
   async add(league: LeagueInput) {
@@ -37,6 +40,11 @@ export class LeagueUseCase
 
   async delete(id: number) {
     const result = await this.deleteRepo.delete(id);
+    return result;
+  }
+
+  async finish(id: number) {
+    const result = await this.finishRepo.finish(id);
     return result;
   }
 }

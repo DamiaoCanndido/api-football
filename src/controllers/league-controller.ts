@@ -49,4 +49,14 @@ export class LeagueController {
       next(error);
     }
   }
+
+  async finish(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const league = await this.leagueUseCase.finish(Number(id));
+      return res.status(200).json(league);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
