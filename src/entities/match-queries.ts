@@ -4,7 +4,9 @@ export class MatchQueries {
   constructor(
     public leagueId?: number,
     public teamId?: number,
-    public round?: string
+    public round?: string,
+    public from?: string,
+    public to?: string
   ) {}
 }
 

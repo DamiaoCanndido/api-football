@@ -49,8 +49,8 @@ export class MatchUseCase
     return result;
   }
 
-  async groupByDates() {
-    const result = await this.groupByDateRepo.groupByDates();
+  async groupByDates(mtQuery: MatchQueries) {
+    const result = await this.groupByDateRepo.groupByDates(mtQuery);
     return result;
   }
 

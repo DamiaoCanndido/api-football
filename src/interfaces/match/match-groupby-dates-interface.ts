@@ -1,5 +1,5 @@
-import { MatchOutput } from '../../entities';
+import { MatchOutput, MatchQueries } from '../../entities';
 
 export interface MatchGroupByDatesInterface {
-  groupByDates: () => Promise<MatchOutput[]>;
+  groupByDates: (mtQuery: MatchQueries) => Promise<MatchOutput[]>;
 }

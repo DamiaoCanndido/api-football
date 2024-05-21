@@ -7,6 +7,8 @@ export class MatchFindByLeagueRepository implements MatchFindByLeagueInterface {
   async findByLeague({
     leagueId,
     round,
+    from,
+    to,
   }: MatchQueries): Promise<MatchOutput[]> {
     try {
       const league = await prisma.league.findUnique({
@@ -20,6 +22,10 @@ export class MatchFindByLeagueRepository implements MatchFindByLeagueInterface {
       const match = await prisma.match.findMany({
         where: {
           leagueId,
+          startDate: {
+            gte: from ? new Date(from) : undefined,
+            lte: to ? new Date(to) : undefined,
+          },
           round: {
             contains: round,
             not: {
@@ -33,6 +39,7 @@ export class MatchFindByLeagueRepository implements MatchFindByLeagueInterface {
           away: true,
           league: {
             select: {
+              id: true,
               name: true,
             },
           },

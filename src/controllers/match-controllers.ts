@@ -19,11 +19,13 @@ export class MatchController {
 
   async findByLeague(req: Request, res: Response, next: NextFunction) {
     const { leagueId } = req.params;
-    const { round }: MatchQueries = req.query;
+    const { round, from, to }: MatchQueries = req.query;
     try {
       const match = await this.matchUseCase.findByLeague({
         leagueId: Number(leagueId),
         round,
+        from,
+        to,
       });
       return res.status(200).json(match);
     } catch (error) {
@@ -33,9 +35,12 @@ export class MatchController {
 
   async findByTeam(req: Request, res: Response, next: NextFunction) {
     const { teamId } = req.params;
+    const { from, to }: MatchQueries = req.query;
     try {
       const match = await this.matchUseCase.findByTeam({
         teamId: Number(teamId),
+        from,
+        to,
       });
       return res.status(200).json(match);
     } catch (error) {
@@ -64,8 +69,9 @@ export class MatchController {
   }
 
   async groupByDates(req: Request, res: Response, next: NextFunction) {
+    const { from, to }: MatchQueries = req.query;
     try {
-      const match = await this.matchUseCase.groupByDates();
+      const match = await this.matchUseCase.groupByDates({ from, to });
       return res.status(200).json(match);
     } catch (error) {
       next(error);

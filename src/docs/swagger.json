@@ -528,6 +528,20 @@
       "get": {
         "summary": "Buscar jogos por data",
         "tags": ["Match"],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Início",
+            "required": false
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "Fim",
+            "required": false
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -558,6 +572,18 @@
             "name": "round",
             "in": "query",
             "description": "Round",
+            "required": false
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Início",
+            "required": false
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "Fim",
             "required": false
           }
         ],
@@ -594,6 +620,18 @@
             "in": "path",
             "description": "Id do time",
             "required": true
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Início",
+            "required": false
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "Fim",
+            "required": false
           }
         ],
         "responses": {
