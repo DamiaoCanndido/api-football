@@ -6,7 +6,8 @@ export class MatchQueries {
     public teamId?: number,
     public round?: string,
     public from?: string,
-    public to?: string
+    public to?: string,
+    public t?: string
   ) {}
 }
 

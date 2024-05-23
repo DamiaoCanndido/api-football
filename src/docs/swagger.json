@@ -540,6 +540,12 @@
             "in": "query",
             "description": "Fim",
             "required": false
+          },
+          {
+            "name": "t",
+            "in": "query",
+            "description": "Primeiros",
+            "required": false
           }
         ],
         "responses": {
@@ -584,6 +590,12 @@
             "name": "to",
             "in": "query",
             "description": "Fim",
+            "required": false
+          },
+          {
+            "name": "t",
+            "in": "query",
+            "description": "Primeiros",
             "required": false
           }
         ],
@@ -631,6 +643,12 @@
             "name": "to",
             "in": "query",
             "description": "Fim",
+            "required": false
+          },
+          {
+            "name": "t",
+            "in": "query",
+            "description": "Primeiros",
             "required": false
           }
         ],

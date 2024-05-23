@@ -9,6 +9,7 @@ export class MatchFindByLeagueRepository implements MatchFindByLeagueInterface {
     round,
     from,
     to,
+    t,
   }: MatchQueries): Promise<MatchOutput[]> {
     try {
       const league = await prisma.league.findUnique({
@@ -20,12 +21,14 @@ export class MatchFindByLeagueRepository implements MatchFindByLeagueInterface {
         throw new HttpException(404, 'league id not valid.');
       }
       const match = await prisma.match.findMany({
+        take: t ? Number(t) : undefined,
         where: {
           leagueId,
           startDate: {
             gte: from ? new Date(from) : undefined,
             lte: to ? new Date(to) : undefined,
           },
+          fullTime: false,
           round: {
             contains: round,
             not: {
@@ -39,7 +42,6 @@ export class MatchFindByLeagueRepository implements MatchFindByLeagueInterface {
           away: true,
           league: {
             select: {
-              id: true,
               name: true,
             },
           },

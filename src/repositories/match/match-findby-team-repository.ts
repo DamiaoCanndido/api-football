@@ -4,7 +4,12 @@ import { MatchQueries, MatchOutput } from '../../entities';
 import { HttpException } from '../../errors';
 
 export class MatchFindByTeamRepository implements MatchFindByTeamInterface {
-  async findByTeam({ teamId, from, to }: MatchQueries): Promise<MatchOutput[]> {
+  async findByTeam({
+    teamId,
+    from,
+    to,
+    t,
+  }: MatchQueries): Promise<MatchOutput[]> {
     try {
       const team = await prisma.team.findUnique({
         where: {
@@ -15,19 +20,20 @@ export class MatchFindByTeamRepository implements MatchFindByTeamInterface {
         throw new HttpException(404, 'team id not valid.');
       }
       const match = await prisma.match.findMany({
+        take: t ? Number(t) : undefined,
         where: {
           OR: [{ homeId: teamId }, { awayId: teamId }],
           startDate: {
             gte: from ? new Date(from) : undefined,
             lte: to ? new Date(to) : undefined,
           },
+          fullTime: false,
         },
         include: {
           home: true,
           away: true,
           league: {
             select: {
-              id: true,
               name: true,
             },
           },

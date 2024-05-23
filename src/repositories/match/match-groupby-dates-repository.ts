@@ -4,22 +4,23 @@ import { MatchOutput, MatchQueries } from '../../entities';
 import { HttpException } from '../../errors';
 
 export class MatchGroupByDatesRepository implements MatchGroupByDatesInterface {
-  async groupByDates({ from, to }: MatchQueries): Promise<MatchOutput[]> {
+  async groupByDates({ from, to, t }: MatchQueries): Promise<MatchOutput[]> {
     try {
       const match = await prisma.match.findMany({
+        take: t ? Number(t) : undefined,
         orderBy: [{ fullTime: 'asc' }, { startDate: 'asc' }],
         where: {
           startDate: {
             gte: from ? new Date(from) : undefined,
             lte: to ? new Date(to) : undefined,
           },
+          fullTime: false,
         },
         include: {
           home: true,
           away: true,
           league: {
             select: {
-              id: true,
               name: true,
             },
           },
