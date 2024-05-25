@@ -101,4 +101,14 @@ export class MatchController {
       next(error);
     }
   }
+
+  async findById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const match = await this.matchUseCase.findbyId(Number(id));
+      return res.status(200).json(match);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

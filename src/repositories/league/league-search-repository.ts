@@ -8,9 +8,10 @@ export class LeagueSearchRepository implements LeagueSearchInterface {
       where: {
         name: { contains: name, mode: 'insensitive' },
         country: { contains: country, mode: 'insensitive' },
+        finished: false,
       },
       orderBy: {
-        finished: 'asc',
+        season: 'asc',
       },
     });
     return leagues;

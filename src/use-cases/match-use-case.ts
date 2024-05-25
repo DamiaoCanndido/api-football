@@ -3,6 +3,7 @@ import {
   MatchDeleteInterface,
   MatchFindByLeagueInterface,
   MatchFindByTeamInterface,
+  MatchFindbyIdInterface,
   MatchGroupByDatesInterface,
   MatchRescheduledInterface,
   MatchUpdateScoresInterface,
@@ -17,7 +18,8 @@ export class MatchUseCase
     MatchUpdateScoresInterface,
     MatchGroupByDatesInterface,
     MatchDeleteInterface,
-    MatchRescheduledInterface
+    MatchRescheduledInterface,
+    MatchFindbyIdInterface
 {
   constructor(
     private addFxRepo: MatchAddInterface,
@@ -26,7 +28,8 @@ export class MatchUseCase
     private updateScoresRepo: MatchUpdateScoresInterface,
     private groupByDateRepo: MatchGroupByDatesInterface,
     private deleteRepo: MatchDeleteInterface,
-    private rescheduledRepo: MatchRescheduledInterface
+    private rescheduledRepo: MatchRescheduledInterface,
+    private findByIdRepo: MatchFindbyIdInterface
   ) {}
 
   async add(match: MatchInput) {
@@ -61,6 +64,11 @@ export class MatchUseCase
 
   async reschedule(id: number, startDate: string) {
     const result = await this.rescheduledRepo.reschedule(id, startDate);
+    return result;
+  }
+
+  async findbyId(id: number) {
+    const result = await this.findByIdRepo.findbyId(id);
     return result;
   }
 }
