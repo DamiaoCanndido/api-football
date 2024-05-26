@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { MatchUseCase } from '../use-cases';
 import { Match, MatchInput, MatchQueries, MatchScores } from '../entities';
+import { io } from 'ws';
 
 export class MatchController {
   constructor(private matchUseCase: MatchUseCase) {}
@@ -64,6 +65,11 @@ export class MatchController {
         awayPenalty
       );
       const match = await this.matchUseCase.updateScores(iMatch);
+      io.emit('match', {
+        id: match.id,
+        homeScore: match.homeScore,
+        awayScore: match.awayScore,
+      });
       return res.status(200).json(match);
     } catch (error) {
       next(error);

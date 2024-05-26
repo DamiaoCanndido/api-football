@@ -18,6 +18,8 @@ export interface MatchOutput {
   startDate: Date;
   home: TeamOutput;
   away: TeamOutput;
+  homeScore: number | null;
+  awayScore: number | null;
   leagueId: number | null;
   round: string | null;
   league: League | null;
