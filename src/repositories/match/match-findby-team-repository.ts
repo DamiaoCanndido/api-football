@@ -9,6 +9,7 @@ export class MatchFindByTeamRepository implements MatchFindByTeamInterface {
     from,
     to,
     t,
+    ft,
   }: MatchQueries): Promise<MatchOutput[]> {
     try {
       const team = await prisma.team.findUnique({
@@ -27,7 +28,7 @@ export class MatchFindByTeamRepository implements MatchFindByTeamInterface {
             gte: from ? new Date(from) : undefined,
             lte: to ? new Date(to) : undefined,
           },
-          fullTime: false,
+          fullTime: ft === 'true' ? true : ft === 'false' ? false : undefined,
         },
         include: {
           home: true,

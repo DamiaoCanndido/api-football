@@ -7,7 +7,8 @@ export class MatchQueries {
     public round?: string,
     public from?: string,
     public to?: string,
-    public t?: string
+    public t?: string,
+    public ft?: string
   ) {}
 }
 

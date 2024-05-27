@@ -10,6 +10,7 @@ export class MatchFindByLeagueRepository implements MatchFindByLeagueInterface {
     from,
     to,
     t,
+    ft,
   }: MatchQueries): Promise<MatchOutput[]> {
     try {
       const league = await prisma.league.findUnique({
@@ -28,7 +29,7 @@ export class MatchFindByLeagueRepository implements MatchFindByLeagueInterface {
             gte: from ? new Date(from) : undefined,
             lte: to ? new Date(to) : undefined,
           },
-          fullTime: false,
+          fullTime: ft === 'true' ? true : ft === 'false' ? false : undefined,
           round: {
             contains: round,
             not: {

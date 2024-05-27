@@ -4,7 +4,12 @@ import { MatchOutput, MatchQueries } from '../../entities';
 import { HttpException } from '../../errors';
 
 export class MatchGroupByDatesRepository implements MatchGroupByDatesInterface {
-  async groupByDates({ from, to, t }: MatchQueries): Promise<MatchOutput[]> {
+  async groupByDates({
+    from,
+    to,
+    t,
+    ft,
+  }: MatchQueries): Promise<MatchOutput[]> {
     try {
       const match = await prisma.match.findMany({
         take: t ? Number(t) : undefined,
@@ -14,7 +19,7 @@ export class MatchGroupByDatesRepository implements MatchGroupByDatesInterface {
             gte: from ? new Date(from) : undefined,
             lte: to ? new Date(to) : undefined,
           },
-          fullTime: false,
+          fullTime: ft === 'true' ? true : ft === 'false' ? false : undefined,
         },
         include: {
           home: true,

@@ -546,6 +546,12 @@
             "in": "query",
             "description": "Primeiros",
             "required": false
+          },
+          {
+            "name": "ft",
+            "in": "query",
+            "description": "Encerrado",
+            "required": false
           }
         ],
         "responses": {
@@ -596,6 +602,12 @@
             "name": "t",
             "in": "query",
             "description": "Primeiros",
+            "required": false
+          },
+          {
+            "name": "ft",
+            "in": "query",
+            "description": "Encerrado",
             "required": false
           }
         ],
@@ -649,6 +661,12 @@
             "name": "t",
             "in": "query",
             "description": "Primeiros",
+            "required": false
+          },
+          {
+            "name": "ft",
+            "in": "query",
+            "description": "Encerrado",
             "required": false
           }
         ],
