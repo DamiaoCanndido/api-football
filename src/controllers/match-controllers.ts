@@ -119,4 +119,17 @@ export class MatchController {
       next(error);
     }
   }
+
+  async findByIds(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { ids } = req.params;
+      const idArray = ids.split('-').map((e) => {
+        return Number(e);
+      });
+      const match = await this.matchUseCase.findbyIds(idArray);
+      return res.status(200).json(match);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

@@ -5,4 +5,5 @@ export * from './match-update-scores-interface';
 export * from './match-groupby-dates-interface';
 export * from './match-delete-interface';
 export * from './match-rescheduled-interface';
-export * from './match-findby-id';
+export * from './match-findby-id-interface';
+export * from './match-findby-multiple-ids-interface';

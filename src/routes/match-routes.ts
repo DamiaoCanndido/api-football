@@ -8,6 +8,7 @@ import {
   MatchDeleteRepository,
   MatchRescheduledRepository,
   MatchFindbyIdRepository,
+  MatchFindbyMultipleIdsRepository,
 } from '../repositories/match';
 import { MatchUseCase } from '../use-cases';
 import { MatchController } from '../controllers';
@@ -28,6 +29,7 @@ export class MatchRoutes {
     const deleteRepo = new MatchDeleteRepository();
     const rescheludeRepo = new MatchRescheduledRepository();
     const findbyIdRepo = new MatchFindbyIdRepository();
+    const findbyIdsRepo = new MatchFindbyMultipleIdsRepository();
     const fixturesUseCase = new MatchUseCase(
       addRepo,
       findByLeagueRepo,
@@ -36,7 +38,8 @@ export class MatchRoutes {
       groupByDatesRepo,
       deleteRepo,
       rescheludeRepo,
-      findbyIdRepo
+      findbyIdRepo,
+      findbyIdsRepo
     );
     this.matchController = new MatchController(fixturesUseCase);
     this.initRoutes();
@@ -78,6 +81,10 @@ export class MatchRoutes {
     this.router.get(
       '/:id',
       this.matchController.findById.bind(this.matchController)
+    );
+    this.router.get(
+      '/multi/:ids',
+      this.matchController.findByIds.bind(this.matchController)
     );
   }
 }

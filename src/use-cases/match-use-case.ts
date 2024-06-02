@@ -4,11 +4,17 @@ import {
   MatchFindByLeagueInterface,
   MatchFindByTeamInterface,
   MatchFindbyIdInterface,
+  MatchFindbyMultipleIdsInterface,
   MatchGroupByDatesInterface,
   MatchRescheduledInterface,
   MatchUpdateScoresInterface,
 } from '../interfaces/match';
-import { MatchInput, MatchQueries, MatchScores } from '../entities';
+import {
+  MatchInput,
+  MatchOutput,
+  MatchQueries,
+  MatchScores,
+} from '../entities';
 
 export class MatchUseCase
   implements
@@ -19,7 +25,8 @@ export class MatchUseCase
     MatchGroupByDatesInterface,
     MatchDeleteInterface,
     MatchRescheduledInterface,
-    MatchFindbyIdInterface
+    MatchFindbyIdInterface,
+    MatchFindbyMultipleIdsInterface
 {
   constructor(
     private addFxRepo: MatchAddInterface,
@@ -29,7 +36,8 @@ export class MatchUseCase
     private groupByDateRepo: MatchGroupByDatesInterface,
     private deleteRepo: MatchDeleteInterface,
     private rescheduledRepo: MatchRescheduledInterface,
-    private findByIdRepo: MatchFindbyIdInterface
+    private findByIdRepo: MatchFindbyIdInterface,
+    private findByIdsRepo: MatchFindbyMultipleIdsInterface
   ) {}
 
   async add(match: MatchInput) {
@@ -69,6 +77,11 @@ export class MatchUseCase
 
   async findbyId(id: number) {
     const result = await this.findByIdRepo.findbyId(id);
+    return result;
+  }
+
+  async findbyIds(ids: number[]) {
+    const result = await this.findByIdsRepo.findbyIds(ids);
     return result;
   }
 }

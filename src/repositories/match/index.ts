@@ -6,3 +6,4 @@ export * from './match-groupby-dates-repository';
 export * from './match-delete-repository';
 export * from './match-rescheduled-repository';
 export * from './match-findby-id-repository';
+export * from './match-findby-multiple-ids-repository';

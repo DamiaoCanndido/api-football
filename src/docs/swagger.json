@@ -823,6 +823,44 @@
           }
         }
       }
+    },
+    "/match/multi/{ids}": {
+      "get": {
+        "summary": "Encontrar jogos pelos ids",
+        "tags": ["Match"],
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "description": "Ids dos jogos separados por -",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "401": {
+            "description": "Unathorized"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Match"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
