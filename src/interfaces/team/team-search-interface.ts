@@ -1,4 +1,4 @@
-import { Team, TeamOutput, TeamQueries } from '../../entities';
+import { TeamOutput, TeamQueries } from '../../entities';
 
 export interface TeamSearchInterface {
   search: (team: TeamQueries) => Promise<TeamOutput[]>;

@@ -2,7 +2,7 @@ import { prisma } from '../../infra';
 import { MatchOutput } from '../../entities';
 import { MatchRescheduledInterface } from '../../interfaces/match';
 import { HttpException } from '../../errors';
-import { dateNow } from 'helpers';
+import { dateNow } from '../../helpers';
 
 export class MatchRescheduledRepository implements MatchRescheduledInterface {
   async reschedule(id: number, startDate: string): Promise<MatchOutput> {

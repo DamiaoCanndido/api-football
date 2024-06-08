@@ -5,8 +5,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/main/main.ts",
+    "start": "node dist/src/main/main.js",
+    "build": "npx tsc",
     "test": "vitest --ui --api 9527",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "seed": "node dist/prisma/seed.js",
+    "db:migrate": "npx prisma generate && npx prisma migrate deploy"
   },
   "keywords": [],
   "author": "Damião Cândido",
