@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { MatchUseCase } from '../use-cases';
 import { Match, MatchInput, MatchQueries, MatchScores } from '../entities';
-import { io } from 'ws';
+import { io } from '../ws';
 
 export class MatchController {
   constructor(private matchUseCase: MatchUseCase) {}
