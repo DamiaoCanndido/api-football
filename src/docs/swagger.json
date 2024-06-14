@@ -7,6 +7,10 @@
   },
   "servers": [
     {
+      "url": "https://football-api-1.onrender.com",
+      "description": "Api de produção"
+    },
+    {
       "url": "http://localhost:3333",
       "description": "Api de desenvolvimento"
     }
