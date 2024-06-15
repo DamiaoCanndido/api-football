@@ -7,6 +7,11 @@ import * as dotenv from 'dotenv';
 import { errorMiddleware } from '../middlewares';
 import { TeamRoutes, LeagueRoutes, MatchRoutes } from '../routes';
 
+const CSS_URL =
+  'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.0.0/swagger-ui.min.css';
+const CUSTOM_JS =
+  'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.0.0/swagger-ui-bundle.min.js';
+
 dotenv.config();
 
 export class App {
@@ -25,7 +30,14 @@ export class App {
     app.use('/team', this.teamRoutes.router);
     app.use('/league', this.leagueRoutes.router);
     app.use('/match', this.matchRoutes.router);
-    app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+    app.use(
+      '/docs',
+      swaggerUi.serve,
+      swaggerUi.setup(swaggerDocs, {
+        customCssUrl: CSS_URL,
+        customJs: CUSTOM_JS,
+      })
+    );
   }
 
   errorInterception() {
