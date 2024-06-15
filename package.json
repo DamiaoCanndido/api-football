@@ -10,7 +10,7 @@
     "test": "vitest --ui --api 9527",
     "coverage": "vitest run --coverage",
     "seed": "node dist/prisma/seed.js",
-    "vercel-build": "npx prisma generate && npx prisma migrate deploy"
+    "db:migrate": "npx prisma generate && npx prisma migrate deploy"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
