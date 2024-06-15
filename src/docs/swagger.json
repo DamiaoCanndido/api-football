@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://football-api-sepia.vercel.app",
+      "url": "https://football-api-1.onrender.com",
       "description": "Api de produção"
     },
     {
