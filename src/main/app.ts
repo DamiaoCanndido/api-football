@@ -5,7 +5,7 @@ import { app, server, initializeSocket } from '../ws';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
 import { errorMiddleware } from '../middlewares';
-import { TeamRoutes, LeagueRoutes, MatchRoutes } from '../routes';
+import { TeamRoutes, LeagueRoutes, MatchRoutes, SignupRoutes } from '../routes';
 
 dotenv.config();
 
@@ -13,6 +13,7 @@ export class App {
   private teamRoutes = new TeamRoutes();
   private leagueRoutes = new LeagueRoutes();
   private matchRoutes = new MatchRoutes();
+  private signupRoutes = new SignupRoutes();
 
   constructor() {
     this.middlewaresInitialize();
@@ -25,6 +26,7 @@ export class App {
     app.use('/team', this.teamRoutes.router);
     app.use('/league', this.leagueRoutes.router);
     app.use('/match', this.matchRoutes.router);
+    app.use('/signup', this.signupRoutes.router);
     app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
   }
 
