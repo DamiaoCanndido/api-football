@@ -1,4 +1,4 @@
-import { SignupUserRepository } from 'src/repositories/user';
+import { SignupUserRepository } from '../repositories/user';
 import { SignupUserInterface } from '../interfaces/user';
 import { SignupUserInput } from '../entities';
 import { HttpException } from '../errors';

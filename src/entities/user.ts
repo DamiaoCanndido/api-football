@@ -42,3 +42,18 @@ export class SignupValidation {
     }
   }
 }
+
+export class SigninValidation {
+  constructor(private readonly input: SigninUserInput) {
+    if (
+      !this.input.email ||
+      !emailRegex.test(this.input.email) ||
+      this.input.email.length < 6
+    ) {
+      throw new HttpException(400, 'Email is incorrect.');
+    }
+    if (!this.input.password || this.input.password.length < 6) {
+      throw new HttpException(400, 'Password is incorrect.');
+    }
+  }
+}
